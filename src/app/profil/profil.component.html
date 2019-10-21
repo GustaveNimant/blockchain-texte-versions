@@ -1,0 +1,20 @@
+<app-main-menu></app-main-menu>
+<h2>
+    Profil
+    <ul>
+	<li *ngIf="(!isAuth)">
+	    <a routerLink="/login"
+	       routerLinkActive="active">Login</a>
+	</li>
+	<li *ngIf="(!isAuth)">
+	    <a routerLink="/profil/new-profil"
+	       routerLinkActive="active">Créer un profil</a>
+	</li>
+	<li *ngIf="(isAuth)">
+	    <a routerLink="/profil/single-profil"
+	       routerLinkActive="active">Afficher le Profil</a>
+	</li>
+    </ul>
+</h2>
+
+<router-outlet></router-outlet>

@@ -1,0 +1,36 @@
+<mat-spinner *ngIf="loading"></mat-spinner>
+<div *ngIf="debug">Debug:Dans single-texte.component.html</div>
+<div *ngIf="!loading">
+
+    <div class="single-texte-pane">
+
+	<div class="single-texte-info">
+	    <p>Clé publique de l'auteur : {{ currentTexte.auteurClePublique }}</p>
+	    <p>Contenu : {{ currentTexte.contenu }}</p>
+	    <button class="btn btn-success m-1"
+		    (click)="onNotate()">Noter</button>
+	    <br>
+	    <button class="btn btn-primary m-1"
+		    (click)="onDisplayNotation()">Afficher les Notations</button>
+	    <br>
+	    <button class="btn btn-success m-1"
+		    (click)="onNewTexteVersion()">Créer une nouvelle version</button>
+	    <br>
+	</div>
+	
+	<button class="btn btn-link"
+		       (click)="onGoAllTexte()"><< Retour à la liste des Textes</button>
+
+	<p class="alert-danger"
+	   *ngIf="errorMessage">Dans single-texte.component.html.<br>Erreur<br> {{ errorMessage }}</p>
+	
+	<p class="alert-danger" *ngIf="!isAuth"><br>
+	    Il faut <a class="header-link"
+		       routerLink="/login"
+		       routerLinkActive="active">
+	    <button class="btn btn-primary">se connecter</button>
+	    </a> pour modifier un texte
+	</p>
+
+    </div>
+</div>
