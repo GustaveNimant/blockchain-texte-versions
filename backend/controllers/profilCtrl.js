@@ -1,8 +1,8 @@
 const profilMongooseModel = require('../models/profilMongooseModel');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const Debug = require('../models/debug');
-const validateEmail = require('../models/outils');
+const Debug = require('../outils/debug');
+const validateEmail = require('../outils/outils');
 
 exports.createProfilCtrl = (req, res, next) => {
     if (Debug.debug) {console.log('Entrée dans profilCtrl.js.createProfilCtrl avec req.body ', req.body)};

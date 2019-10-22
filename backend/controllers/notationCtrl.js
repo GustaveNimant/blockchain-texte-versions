@@ -1,7 +1,7 @@
 const notationMongooseModel = require('../models/notationMongooseModel');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const Debug = require('../models/debug');
+const Debug = require('../outils/debug');
 
 exports.createNotationCtrl = (req, res, next) => {
     if (Debug.debug) {console.log('Entrée dans notationCtrl.js.createNotationCtrl avec req.body ', req.body)};

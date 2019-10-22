@@ -1,5 +1,5 @@
 const texteMongooseModel = require('../models/texteMongooseModel');
-const Debug = require('../models/debug');
+const Debug = require('../outils/debug');
 const bcrypt = require('bcrypt');
 
 exports.createTexteVersionCtrl = (req, res, next) => {

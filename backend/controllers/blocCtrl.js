@@ -1,5 +1,6 @@
 const blocMongooseModel = require('../models/blocMongooseModel');
-const Debug = require('../models/debug');
+const Debug = require('../outils/debug');
+const Outils = require('../outils/outils');
 
 exports.createBlocCtrl = (req, res, next) => {
     if (Debug.debug) {console.log('Entrée dans blocCtrl.js.createBlocCtrl avec req.body ', req.body)};
@@ -46,7 +47,6 @@ exports.deleteBlocCtrl = (req, res, next) => {
 	);
 };
 
-
 exports.getOneBlocCtrl = (req, res, next) => {
     if (Debug.debug) {console.log('Entrée dans blocCtrl.js.getOneBlocCtrl avec req.params.id ', req.params.id)};
     
@@ -77,6 +77,31 @@ exports.getAllBlocCtrl = (req, res, next) => {
 	    }
 	).catch(
 	    (error) => {
+		res.status(400).json({
+		    error: error
+		});
+	    }
+	);
+};
+
+exports.mineBlocCtrl = (req, res, next) => {
+    if (Debug.debug) {console.log('Entrée dans blocCtrl.js.mineBlocCtrl avec req.body ', req.body)};
+
+    const bloc = new blocMongooseModel({
+	texteObjectId: req.body.texteObjectId,
+	assertionList: req.body.assertionList,
+    });
+    
+    bloc.save()
+	.then(
+	    () => {
+		res.status(201).json({
+		    message: 'Post sauvé !'
+		});
+	    }
+	).catch(
+	    (error) => {
+		if (Debug.debug) {console.log('Dans blocCtrl.js.createBlocCtrl Erreur ', error)};
 		res.status(400).json({
 		    error: error
 		});

@@ -1,5 +1,5 @@
 const pairMongooseModel = require('../models/pairMongooseModel');
-const Debug = require('../models/debug');
+const Debug = require('../outils/debug');
 
 exports.createPairCtrl = (req, res, next) => {
     if (Debug.debug) {console.log('Entrée dans pairCtrl.js.createPairCtrl avec req.body ', req.body)};
