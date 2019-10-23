@@ -23,6 +23,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
     private modeSub: Subscription;
     private currentPseudoSub: Subscription;
+    private currentEmailSub: Subscription;
     private isAuthSub: Subscription;
     private verboseSub: Subscription;
 
@@ -77,6 +78,13 @@ export class HeaderComponent implements OnInit, OnDestroy {
     onGetPseudo () {
 	let here = O.functionName ();
 	console.log('%cEntrée dans','color:#00aa00', here);
+
+	this.currentEmailSub = this.stateService.currentEmail$.subscribe(
+	    (ema) => {
+		this.currentEmail = ema;
+		console.log('Dans',here,'subscribe currentEmail as', this.currentEmail);
+	    }
+	);
 
 	if (this.currentEmail == undefined) {
 	    this.pseudo = undefined;

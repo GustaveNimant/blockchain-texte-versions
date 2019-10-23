@@ -6,8 +6,9 @@ const profilCtrl = require('../controllers/profilCtrl');
 
 profilRoutes.post('/signup', profilCtrl.signup);
 profilRoutes.post('/login', profilCtrl.login); 
-profilRoutes.get('/',   profilCtrl.getProfilCtrl);
+profilRoutes.get('/',   profilCtrl.getAllProfilCtrl);
 profilRoutes.post('/',  profilCtrl.createProfilCtrl);
+profilRoutes.get('/:id',   profilCtrl.getOneProfilByAnyIdCtrl);
 profilRoutes.put('/:id',  profilCtrl.modifyProfilCtrl);
 profilRoutes.delete('/:id',   profilCtrl.deleteProfilCtrl);
 

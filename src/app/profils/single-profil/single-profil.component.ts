@@ -38,26 +38,23 @@ export class SingleProfilComponent implements OnInit, OnDestroy {
 
 	this.loading = true;
 
-	this.debug = this.stateService.debug;
+	this.isAuthSub = this.stateService.debug$.subscribe(
+	    (boo) => {this.debug = boo;}
+	);
+
 	console.log('Dans',here,'debug', this.debug);
 
-	this.stateService.mode$.next('single-profil');
 	this.userId = this.profilService.userId ? this.profilService.userId : 'profilID40282382';
-	console.log('Dans ngOnInit userId', this.userId);
+	console.log('Dans',here,'userId', this.userId);
 	
-	this.route.params.subscribe(
-	    (params: Params) => {
-		console.log('Dans ngOnInit params', params);
-		this.profilService.getProfilById(params.id)
-		    .then(
-			(com: ProfilModel) => {
-			    console.log('Dans ngOnInit.route.params com', com);
-			    this.loading = false;
-			    this.currentProfil = com;
-			}
-		    );
-	    }
-	);
+	this.profilService.getProfilById(this.userId)
+	    .then(
+		(com: ProfilModel) => {
+		    console.log('Dans',here,'com', com);
+		    this.loading = false;
+		    this.currentProfil = com;
+		}
+	    );
 	
 	this.isAuthSub = this.profilService.isAuth$.subscribe(
 	    (boo) => {

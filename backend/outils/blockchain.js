@@ -1,6 +1,12 @@
+'use strict';
+//var CryptoJS = require("crypto-js");
+var express = require("express");
+var bodyParser = require('body-parser');
+var WebSocket = require("ws");
+var O = require("./outils");
 
 module.exports = function generateNextBlock (blockData, caller) {
-    var here = functionNameJS();
+    var here = O.functionNameJS();
     console.log(entering(),'Entrée dans',here,'appelé par',caller,'avec blockData',blockData);
 
     var previousBlock = getLatestBlock();
@@ -50,12 +56,6 @@ var isValidNewBlock = (newBlock, previousBlock) => {
         console.log(exiting(),'Sortie  de ',here);
     return true;
 };
-
-var functionNameJS = () => {
-    var stack = new Error().stack;
-    var caller = (stack.split('at ')[2]).split(' ')[0];
-    return caller;
-}
 
 var broadcast = (message,caller) => {
     var here = functionNameJS();

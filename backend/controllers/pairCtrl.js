@@ -1,8 +1,8 @@
 const pairMongooseModel = require('../models/pairMongooseModel');
-const Debug = require('../outils/debug');
+const D = require('../outils/debug');
 
 exports.createPairCtrl = (req, res, next) => {
-    if (Debug.debug) {console.log('Entrée dans pairCtrl.js.createPairCtrl avec req.body ', req.body)};
+    if (D.debug) {console.log('Entrée dans pairCtrl.js.createPairCtrl avec req.body ', req.body)};
 
     const pair = new pairMongooseModel({
 	texteObjectId: req.body.texteObjectId,
@@ -18,7 +18,7 @@ exports.createPairCtrl = (req, res, next) => {
 	    }
 	).catch(
 	    (error) => {
-		if (Debug.debug) {console.log('Dans pairCtrl.js.createPairCtrl Erreur ', error)};
+		if (D.debug) {console.log('Dans pairCtrl.js.createPairCtrl Erreur ', error)};
 		res.status(400).json({
 		    error: error
 		});
@@ -27,8 +27,8 @@ exports.createPairCtrl = (req, res, next) => {
 };
 
 exports.deletePairCtrl = (req, res, next) => {
-    if (Debug.debug) {console.log('Entrée dans pairCtrl.js.deletePairCtrl avec req.body ', req.body)};
-    if (Debug.debug) {console.log('Entrée dans pairCtrl.js.deletePairCtrl avec req.params.id ', req.params.id)};
+    if (D.debug) {console.log('Entrée dans pairCtrl.js.deletePairCtrl avec req.body ', req.body)};
+    if (D.debug) {console.log('Entrée dans pairCtrl.js.deletePairCtrl avec req.params.id ', req.params.id)};
     
     pairMongooseModel.deleteOne({_id: req.params.id})
 	.then(
@@ -48,14 +48,14 @@ exports.deletePairCtrl = (req, res, next) => {
 
 
 exports.getOnePairCtrl = (req, res, next) => {
-    if (Debug.debug) {console.log('Entrée dans pairCtrl.js.getOnePairCtrl avec req.params.id ', req.params.id)};
+    if (D.debug) {console.log('Entrée dans pairCtrl.js.getOnePairCtrl avec req.params.id ', req.params.id)};
     
     pairMongooseModel.findOne({
 	_id: req.params.id
     })
 	.then(
 	    (tex) => {
-		if (Debug.debug) {console.log('Dans pairCtrl.js.getOnePairCtrl tex', tex)};
+		if (D.debug) {console.log('Dans pairCtrl.js.getOnePairCtrl tex', tex)};
 		res.status(200).json(tex);
 	    }
 	).catch(
@@ -68,7 +68,7 @@ exports.getOnePairCtrl = (req, res, next) => {
 };
 
 exports.getAllPairCtrl = (req, res, next) => {
-    if (Debug.debug) {console.log('Entrée dans pairCtrl.js.getAllPairCtrl avec req.body ', req.body)};
+    if (D.debug) {console.log('Entrée dans pairCtrl.js.getAllPairCtrl avec req.body ', req.body)};
 
     pairMongooseModel.find()
 	.then(
@@ -85,8 +85,8 @@ exports.getAllPairCtrl = (req, res, next) => {
 };
 
 exports.modifyPairCtrl = (req, res, next) => {
-    if (Debug.debug) {console.log('Entrée dans pairCtrl.js.modifyPairCtrl avec req.body ', req.body)};
-    if (Debug.debug) {console.log('Entrée dans pairCtrl.js.modifyPairCtrl avec req.params.id ', req.params.id)};
+    if (D.debug) {console.log('Entrée dans pairCtrl.js.modifyPairCtrl avec req.body ', req.body)};
+    if (D.debug) {console.log('Entrée dans pairCtrl.js.modifyPairCtrl avec req.params.id ', req.params.id)};
     
     const pair = new pairMongooseModel({
 	texteObjectId: req.body.texteObjectId,
@@ -95,7 +95,7 @@ exports.modifyPairCtrl = (req, res, next) => {
 	__v: req.body.__v
     });
 
-    if (Debug.debug) {console.log('Dans pairCtrl.js.modifyPairCtrl pair', pair)};
+    if (D.debug) {console.log('Dans pairCtrl.js.modifyPairCtrl pair', pair)};
     
     pairMongooseModel.updateOne({_id: req.params.id}, pair)  /* version updated ??? */
 	.then(

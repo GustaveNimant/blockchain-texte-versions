@@ -36,9 +36,9 @@ import { NewNotationComponent }     from './notations/new-notation/new-notation.
 import { SingleNotationComponent }  from './notations/single-notation/single-notation.component';
 import { ByobjectidNotationComponent }     from './notations/byobjectid-notation/byobjectid-notation.component';
 
-import { ProfilComponent }        from './profil/profil.component';
-import { NewProfilComponent }       from './profil/new-profil/new-profil.component';
-import { SingleProfilComponent }    from './profil/single-profil/single-profil.component';
+import { ProfilComponent }        from './profils/profil.component';
+import { NewProfilComponent }       from './profils/new-profil/new-profil.component';
+import { SingleProfilComponent }    from './profils/single-profil/single-profil.component';
 
 import { LoginComponent }           from './login/login.component';
 import { DernierBlocComponent }     from './dernier-bloc/dernier-bloc.component';

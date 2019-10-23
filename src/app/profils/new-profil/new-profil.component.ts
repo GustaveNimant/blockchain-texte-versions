@@ -52,7 +52,8 @@ export class NewProfilComponent implements OnInit, OnDestroy {
 	    this.profilForm = this.formBuilder.group({
 		pseudo: [null, Validators.required],
 		email: [null, Validators.required, Validators.email],
-		password: [null, [Validators.required, Validators.pattern(/[0-9a-zA-Z]{6,}/)]]
+		password: [null, [Validators.required, Validators.pattern(/[0-9a-zA-Z]{6,}/)]],
+		clePublique: [null, Validators.required],
 	    });
     }
     
@@ -66,6 +67,7 @@ export class NewProfilComponent implements OnInit, OnDestroy {
 	profil.pseudo = this.profilForm.get('pseudo').value;
 	profil.email = this.profilForm.get('email').value;
 	profil.password = this.profilForm.get('password').value;
+	profil.clePublique = this.profilForm.get('clePublique').value;
 	profil._id = new Date().getTime().toString();
 
 	console.log('Dans onSubmit profil', profil);

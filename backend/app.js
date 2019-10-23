@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const dbConfig = require('./models/dbConfig');
 
 const blocRoutes  = require('./routes/bloc.routes');
+const blockchainRoutes  = require('./routes/blockchain.routes');
 const notationRoutes  = require('./routes/notation.routes');
 const pairRoutes  = require('./routes/pair.routes');
 const profilRoutes  = require('./routes/profil.routes');
@@ -24,8 +25,9 @@ app.use((req, res, next) => { /* no route : applies to all incoming requests */
 app.use(bodyParser.json());              /* reception de la requête sous forme d'Objet JSON */
 
 app.use('/api/bloc', blocRoutes);
+app.use('/api/blockchain', blockchainRoutes);
 app.use('/api/pairs', pairRoutes);
-app.use('/api/profil', profilRoutes);
+app.use('/api/profils', profilRoutes);
 app.use('/api/textes', texteRoutes); 
 
 mongoose.connect(dbConfig.DB_URI, {

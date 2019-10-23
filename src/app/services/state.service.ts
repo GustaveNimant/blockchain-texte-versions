@@ -10,7 +10,7 @@ import * as O from '../outils/outils-management';
 export class StateService {
     public mode$ = new BehaviorSubject<string>('');
 
-    public debug = true;
+    public debug = false;
     public debug$ = new BehaviorSubject<boolean>(this.debug);
 
     public trace = false;

@@ -13,8 +13,7 @@ import * as process from 'process';
 
 export class TexteService {
 
-    //    uri_all = O.uriGet('TexteService') + '/api/textes/';
-    uri_all = 'http://'+(process.env.SERVER_DB || 'localhost')+':'+(process.env.PORT_DB || '3000') + '/api/textes/';
+    uri_all = O.uriGet('TexteService') + '/api/textes/';
     
     constructor(private http: HttpClient)
     {

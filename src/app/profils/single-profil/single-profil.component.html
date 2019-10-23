@@ -6,10 +6,11 @@
 	<div class="single-profil-info">
 	    <p>pseudo : {{ currentProfil.pseudo }}</p>
 	    <p>email : {{ currentProfil.email }}<p>
-	    <p>id du profil : {{ currentProfil._id }}</p>
-
-	    <button class="btn btn-danger m-1" (click)="onDelete()"
-	            [disabled]="!isAuth">Supprimer</button>
+		<p>Clé publique : {{ currentProfil.clePublique }}</p>
+		<p>id du profil : {{ currentProfil._id }}</p>
+		
+		<button class="btn btn-danger m-1" (click)="onDelete()"
+			[disabled]="!isAuth">Supprimer</button>
 	</div>
 	<button class="btn btn-link"
 		(click)="onGoBack()"><< Retour à la liste des Profils</button>

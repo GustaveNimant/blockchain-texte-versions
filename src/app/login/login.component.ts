@@ -79,8 +79,9 @@ export class LoginComponent implements OnInit, OnDestroy {
 		    this.loading = false;
 		    
 		    this.profilService.isAuth$.next(true); /* Improve ? */
-
-		    console.log('Dans onLogin currentUrl >', this.currentUrl,'<');
+		    this.stateService.currentEmail$.next(email); 
+		    console.log('Dans',here,'currentEmail >', email,'<');
+		    console.log('Dans',here,'currentUrl >', this.currentUrl,'<');
 		    if (this.currentUrl && this.currentUrl != '/login') {
 			this.router.navigate([this.currentUrl]);
 		    } else {

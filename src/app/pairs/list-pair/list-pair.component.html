@@ -1,1 +1,25 @@
-<p>list-pair works!</p>
+<mat-spinner *ngIf="loading"></mat-spinner>
+
+<div *ngIf="debug">Debug:Dans list-pair.component.html:loading = {{loading}}</div>
+<div *ngIf="debug">Debug:Dans list-pair.component.html:nombre de pairs = {{pair_a.length}}</div>
+
+<p class="text-center"
+   *ngIf="pair_a.length <= 0 && !loading">
+    La collection <b><i>pair_c</i></b> de la base de données <b><i>blockchain-texte-versions-db</i></b> est vide !</p>
+
+<div class="pair-grid"
+     *ngIf="pair_a.length >= 0">
+
+    <div class="pair-pane"
+	 *ngFor="let un_pair of pair_a"
+	 (click)="onPairClicked(un_pair._id)">
+	<div class="pair-titre">
+	    <h3>
+		Url {{ un_pair.pairUrl }}
+	    </h3>
+	</div>
+    </div>
+    <p class="alert-danger"
+       *ngIf="errorMessage">Dans list-pair.component.html.<br>Erreur lors de la lecture des notations:<br> {{ errorMessage }}</p>
+
+</div>

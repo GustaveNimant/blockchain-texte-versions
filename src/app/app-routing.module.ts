@@ -24,22 +24,13 @@ import { ListNotationComponent }          from './notations/list-notation/list-n
 import { NewNotationComponent }           from './notations/new-notation/new-notation.component';
 import { SingleNotationComponent }        from './notations/single-notation/single-notation.component';
 
-import { ProfilComponent }              from './profil/profil.component';
-import { NewProfilComponent }            from './profil/new-profil/new-profil.component';
-import { SingleProfilComponent }         from './profil/single-profil/single-profil.component';
+import { ProfilComponent }              from './profils/profil.component';
+import { NewProfilComponent }            from './profils/new-profil/new-profil.component';
+import { SingleProfilComponent }         from './profils/single-profil/single-profil.component';
 
 import { LoginComponent } from './login/login.component';
 
 const routes: Routes = [
-    { path: 'profil', component: ProfilComponent,
-      children: [
-	  { path: 'new-profil', component: NewProfilComponent},
-	  { path: 'new-profil/:id', component: NewProfilComponent},
-	  { path: 'single-profil/:id', component: SingleProfilComponent },
-	  { path: '', pathMatch: 'full', redirectTo: '' }, 
-	  { path: '**', redirectTo: '' }
-      ]
-    },
     { path: 'dernierBloc', component: DernierBlocComponent,
       children: [
 	  { path: '', pathMatch: 'full', redirectTo: '' },
@@ -54,6 +45,15 @@ const routes: Routes = [
 	  { path: 'modify-pair/:id', component: ModifyPairComponent},
 	  { path: '', pathMatch: 'full', redirectTo: 'list-pair' },
 	  { path: '**', redirectTo: 'list-pair' }
+      ]
+    },
+    { path: 'profil', component: ProfilComponent,
+      children: [
+	  { path: 'new-profil', component: NewProfilComponent},
+	  { path: 'new-profil/:id', component: NewProfilComponent},
+	  { path: 'single-profil', component: SingleProfilComponent },
+	  { path: '', pathMatch: 'full', redirectTo: 'single-profil' }, 
+	  { path: '**', redirectTo: '' }
       ]
     },
     { path: 'textes', component: TextesComponent,
