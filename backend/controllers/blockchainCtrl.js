@@ -1,4 +1,5 @@
 const blocMongooseModel = require('../models/blocMongooseModel');
+const blockchainMongooseModel = require('../models/blockchainMongooseModel');
 
 const D = require('../outils/debug');
 const O = require('../outils/outils');
@@ -21,7 +22,7 @@ function getBlockchainCtrl (req, res, next) {
 	);
 };
 
-function createBlocCtrl (bloc, res) {
+function createBlocCtrl (bloc) {
     var here=O.functionNameJS();
     if (D.debug) {console.log('Entrée dans blockchainCtrl.js',here,'avec bloc',bloc)};
 
@@ -34,8 +35,26 @@ function createBlocCtrl (bloc, res) {
 	hashCourant: bloc.hashCourant,
 	clePublique: bloc.clePublique
     });
-    console.log('Dans',here,'avant le save index',bloc.index);
-    blocRecu.save()
+    
+    return blocRecu;
+};
+
+function submitBlockchainCtrl (req, res, next) {
+    var here=O.functionNameJS();
+    if (D.debug) {console.log('Entrée dans blockchainCtrl.js',here,'avec req.body ', req.body)};
+
+    var blocRecus = []
+    req.body.forEach( bloc => {
+	console.log('bloc',bloc);
+	blocRecus.push (createBlocCtrl (bloc));
+    });
+
+    const blockchain = new blockchainMongooseModel({
+	blocs : blocRecus,
+    });
+						   
+    console.log('Dans',here,'avant le save');
+    blockchain.save()
 	.then(
 	    () => {
 		res.status(201).json({
@@ -50,19 +69,7 @@ function createBlocCtrl (bloc, res) {
 		});
 	    }
 	);
-        console.log('Dans',here,'après le save index',bloc.index);
-};
-
-function submitBlockchainCtrl (req, res, next) {
-    var here=O.functionNameJS();
-    if (D.debug) {console.log('Entrée dans blockchainCtrl.js',here,'avec req.body ', req.body)};
-
-    req.body.forEach( bloc => {
-	console.log('bloc',bloc);
-	createBlocCtrl (bloc, res);
-    });
-    
-    console.log('Dans',here,'fin de la boucle');
+        console.log('Dans',here,'après le save');
 };
 
 module.exports.getBlockchainCtrl = getBlockchainCtrl;
