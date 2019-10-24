@@ -2,49 +2,12 @@ const texteMongooseModel = require('../models/texteMongooseModel');
 const Debug = require('../outils/debug');
 const bcrypt = require('bcrypt');
 
-exports.createTexteVersionCtrl = (req, res, next) => {
-    if (Debug.debug) {console.log('Entrée dans texteCtrl.js.createTexteVersionCtrl avec req.body ', req.body)};
-
-    const texte = new texteMongooseModel({
-	titre: req.body.titre,
-	contenu: req.body.contenu,
-	shasum: req.body.shasum,
-	noteMoyenne: req.body.noteMoyenne,
-	noteEcartType: req.body.noteEcartType,
-	auteurId: req.body.auteurId,
-	texteContenuId: req.body.texteContenuId,
-	version: req.body.version,
-    });
-
-    texte.save()
-	.then(
-	    () => {
-		res.status(201).json({
-		    message: 'Post sauvé !'
-		});
-	    }
-	).catch(
-	    (error) => {
-		if (Debug.debug) {console.log('Dans texteCtrl.js.createTexteVersionCtrl Erreur ', error)};
-		res.status(400).json({
-		    error: error
-		});
-	    }
-	);
-};
-
 exports.createTexteCtrl = (req, res, next) => {
     if (Debug.debug) {console.log('Entrée dans texteCtrl.js.createTexteCtrl avec req.body ', req.body)};
 
     const texte = new texteMongooseModel({
-	titre: req.body.titre,
 	contenu: req.body.contenu,
-	shasum: req.body.shasum,
-	noteMoyenne: req.body.noteMoyenne,
-	noteEcartType: req.body.noteEcartType,
-	auteurId: req.body.auteurId,
-	texteContenuId: req.body.texteContenuId,
-	version: req.body.version,
+	auteurClePublique: req.body.auteurClePublique,
     });
     
     texte.save()
@@ -128,14 +91,8 @@ exports.modifyTexteCtrl = (req, res, next) => {
     
     const texte = new texteMongooseModel({
 	_id: req.params.id, /* to keep the_id */
-	titre: req.body.titre,
 	contenu: req.body.contenu,
-	shasum: req.body.shasum,
-	noteMoyenne: req.body.noteMoyenne,
-	noteEcartType: req.body.noteEcartType,
-	auteurId: req.body.auteurId,
-	texteContenuId: req.body.texteContenuId,
-	version: req.body.version,
+	auteurClePublique: req.body.auteurClePublique,
     });
 
     if (Debug.debug) {console.log('Dans texteCtrl.js.modifyTexteCtrl texte', texte)};

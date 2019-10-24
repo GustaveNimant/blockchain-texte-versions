@@ -1,6 +1,6 @@
 export class TexteModel {
     contenu: string;
-    clePublique: string;
+    auteurClePublique: string;
     _id: string; /* texteObjectId*/
     __v: number;
 }

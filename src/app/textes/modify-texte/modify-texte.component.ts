@@ -35,7 +35,7 @@ export class ModifyTexteComponent implements OnInit {
 	this.loading = true;
 	this.texteForm = this.formBuilder.group({
 	    contenu: [null, Validators.required],
-	    clePublique: [null, Validators.required],
+	    auteurClePublique: [null, Validators.required],
 	});
 
 	this.stateService.mode$.next('form');
@@ -49,7 +49,7 @@ export class ModifyTexteComponent implements OnInit {
 			console.log('Dans',here,'tex',tex);
 			this.texte = tex;
 			this.texteForm.get('contenu').setValue(this.texte.contenu);
-			this.texteForm.get('clePublique').setValue(this.texte.clePublique);
+			this.texteForm.get('auteurClePublique').setValue(this.texte.auteurClePublique);
 			this.loading = false;
 		    }
 		);
@@ -64,7 +64,7 @@ export class ModifyTexteComponent implements OnInit {
 	const texte = new TexteModel();
 
 	texte.contenu = this.texteForm.get('contenu').value;
-	texte.clePublique = this.texteForm.get('auteurclepublique').value;
+	texte.auteurClePublique = this.texteForm.get('auteurclepublique').value;
 
 	texte._id = this.texte._id;
 	texte.__v = (this.texte.__v +1);

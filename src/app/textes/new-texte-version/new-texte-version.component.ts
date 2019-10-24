@@ -69,7 +69,7 @@ export class NewTexteVersionComponent implements OnInit {
         texteNew = this.texte;
 
 	texteNew.contenu = this.texteForm.get('contenu').value;
-	texteNew.clePublique = this.texteForm.get('clePublique').value;
+	texteNew.auteurClePublique = this.texteForm.get('auteurClePublique').value;
 
 	texteNew._id = this.texte._id;
 	texteNew.__v = (this.texte.__v +1);

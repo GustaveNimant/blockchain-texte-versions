@@ -3,8 +3,9 @@ const blocMongooseModel = require('../models/blocMongooseModel');
 const D = require('../outils/debug');
 const O = require('../outils/outils');
 
-exports.getBlockchainCtrl = (req, res, next) => {
-    if (D.debug) {console.log('Entrée dans blockchainCtrl.js.getBlockchainCtrl avec req.body ', req.body)};
+function getBlockchainCtrl (req, res, next) {
+    var here=O.functionNameJS();
+    if (D.debug) {console.log('Entrée dans blockchainCtrl.js',here,'avec req.body ', req.body)};
 
     blocMongooseModel.find()
 	.then(
@@ -20,21 +21,20 @@ exports.getBlockchainCtrl = (req, res, next) => {
 	);
 };
 
-exports.createBlocCtrl = (req, res, next) => {
-    if (D.debug) {console.log('Entrée dans blockchainCtrl.js.createBlocCtrl avec req.body ', req.body)};
-
-    console.log('Dans blockchainCtrl.js.createBlocCtrl req.body', req.body);
+function createBlocCtrl (bloc, res) {
+    var here=O.functionNameJS();
+    if (D.debug) {console.log('Entrée dans blockchainCtrl.js',here,'avec bloc',bloc)};
 
     const blocRecu = new blocMongooseModel({
-	index: req.body.index,
-	typeContenu: req.body.typeContenu,
-	contenu: req.body.contenu,
-	horodatage: req.body.horodatage,
-	hashPrecedent: req.body.hashPrecedent,
-	hashCourant: req.body.hashCourant,
-	clePublique: req.body.clePublique
+	index: bloc.index,
+	typeContenu: bloc.typeContenu,
+	contenu: bloc.contenu,
+	horodatage: bloc.horodatage,
+	hashPrecedent: bloc.hashPrecedent,
+	hashCourant: bloc.hashCourant,
+	clePublique: bloc.clePublique
     });
-    
+    console.log('Dans',here,'avant le save index',bloc.index);
     blocRecu.save()
 	.then(
 	    () => {
@@ -50,15 +50,21 @@ exports.createBlocCtrl = (req, res, next) => {
 		});
 	    }
 	);
+        console.log('Dans',here,'après le save index',bloc.index);
 };
 
-exports.submitBlockchainCtrl = (req, res, next) => {
-    if (D.debug) {console.log('Entrée dans blockchainCtrl.js.submitBlockchainCtrl avec req.body ', req.body)};
+function submitBlockchainCtrl (req, res, next) {
+    var here=O.functionNameJS();
+    if (D.debug) {console.log('Entrée dans blockchainCtrl.js',here,'avec req.body ', req.body)};
 
-    console.log('Dans blockchainCtrl.js.submitBlockchainCtrl req.body', req.body);
-    req.body.forEach( i => {
-	createBlocCtrl (req[i]);
-    })
+    req.body.forEach( bloc => {
+	console.log('bloc',bloc);
+	createBlocCtrl (bloc, res);
+    });
     
+    console.log('Dans',here,'fin de la boucle');
 };
 
+module.exports.getBlockchainCtrl = getBlockchainCtrl;
+module.exports.createBlocCtrl = createBlocCtrl;
+module.exports.submitBlockchainCtrl = submitBlockchainCtrl;

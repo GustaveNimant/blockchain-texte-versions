@@ -67,7 +67,7 @@ export class NewTexteComponent implements OnInit, OnDestroy {
 	/* initialisation */
 	this.texteForm = this.formBuilder.group({
 	    contenu: [null],
-	    clePublique: ['uneCléPublique'] 
+	    auteurClePublique: ['uneCléPublique'] 
 	});
 	
     }
@@ -81,7 +81,7 @@ export class NewTexteComponent implements OnInit, OnDestroy {
 	const texte = new TexteModel();
 
 	texte.contenu = this.texteForm.get('contenu').value;
-	texte.clePublique = this.texteForm.get('clePublique').value;
+	texte.auteurClePublique = this.texteForm.get('auteurClePublique').value;
 	texte._id = new Date().getTime().toString();
 
 	console.log('Dans onSubmit texte', texte);
