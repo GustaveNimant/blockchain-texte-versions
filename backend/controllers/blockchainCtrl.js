@@ -1,5 +1,5 @@
-const blocMongooseModel = require('../models/blocMongooseModel');
 const blockchainMongooseModel = require('../models/blockchainMongooseModel');
+const blocMongooseModel = require('../models/blocMongooseModel');
 
 const D = require('../outils/debug');
 const O = require('../outils/outils');
@@ -43,7 +43,7 @@ function submitBlockchainCtrl (req, res, next) {
     var here=O.functionNameJS();
     if (D.debug) {console.log('Entrée dans blockchainCtrl.js',here,'avec req.body ', req.body)};
 
-    var blocRecus = []
+    var blocRecus = [];
     req.body.forEach( bloc => {
 	console.log('bloc',bloc);
 	blocRecus.push (createBlocCtrl (bloc));

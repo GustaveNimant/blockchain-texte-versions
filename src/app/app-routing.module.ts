@@ -3,14 +3,20 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { MainMenuComponent }     from './main-menu/main-menu.component';
 
-import { TextesComponent }               from './textes/textes.component';
+import { BlocsComponent }                from './blocs/blocs.component';
+
+import { ListBlocComponent }             from './blocs/list-bloc/list-bloc.component';
+
+import { NewBlocComponent }              from './blocs/new-bloc/new-bloc.component';
+import { SingleBlocComponent }           from './blocs/single-bloc/single-bloc.component';
+import { BlockchainComponent }           from './blocs/blockchain/blockchain.component';
+
+import { TextesComponent }                from './textes/textes.component';
 import { ListTexteComponent }             from './textes/list-texte/list-texte.component';
 import { ModifyTexteComponent }           from './textes/modify-texte/modify-texte.component';
 import { NewTexteComponent }              from './textes/new-texte/new-texte.component';
 import { NewTexteVersionComponent }       from './textes/new-texte-version/new-texte-version.component';
 import { SingleTexteComponent }           from './textes/single-texte/single-texte.component';
-
-import { DernierBlocComponent }           from './dernier-bloc/dernier-bloc.component';
 
 import { PairsComponent }                  from './pairs/pairs.component';
 import { ListPairComponent }               from './pairs/list-pair/list-pair.component';
@@ -24,17 +30,21 @@ import { ListNotationComponent }          from './notations/list-notation/list-n
 import { NewNotationComponent }           from './notations/new-notation/new-notation.component';
 import { SingleNotationComponent }        from './notations/single-notation/single-notation.component';
 
-import { ProfilComponent }              from './profils/profil.component';
+import { ProfilComponent }               from './profils/profil.component';
 import { NewProfilComponent }            from './profils/new-profil/new-profil.component';
 import { SingleProfilComponent }         from './profils/single-profil/single-profil.component';
 
 import { LoginComponent } from './login/login.component';
 
 const routes: Routes = [
-    { path: 'dernierBloc', component: DernierBlocComponent,
+    { path: 'blocs', component: BlocsComponent,
       children: [
-	  { path: '', pathMatch: 'full', redirectTo: '' },
-	  { path: '**', redirectTo: '' }
+	  { path: 'blockchain', component: BlockchainComponent},
+	  { path: 'new-bloc', component: NewBlocComponent},
+	  { path: 'list-bloc', component: ListBlocComponent},
+	  { path: 'single-bloc/:id', component: SingleBlocComponent},
+	  { path: '', pathMatch: 'full', redirectTo: 'list-bloc' },
+	  { path: '**', redirectTo: 'list-bloc' }
       ]
     },
     { path: 'pairs', component: PairsComponent,
@@ -52,7 +62,7 @@ const routes: Routes = [
 	  { path: 'new-profil', component: NewProfilComponent},
 	  { path: 'new-profil/:id', component: NewProfilComponent},
 	  { path: 'single-profil', component: SingleProfilComponent },
-	  { path: '', pathMatch: 'full', redirectTo: 'single-profil' }, 
+	  { path: '', pathMatch: 'full', redirectTo: 'single-profil' },
 	  { path: '**', redirectTo: '' }
       ]
     },
@@ -74,7 +84,7 @@ const routes: Routes = [
 	  { path: 'list-notation', component: ListNotationComponent},
 	  { path: 'single-notation/:id', component: SingleNotationComponent},
 	  { path: 'byobjectid-notation/:texteObjectId', component: ByobjectidNotationComponent},
-	  { path: '', pathMatch: 'full', redirectTo: 'list-notation' }, 
+	  { path: '', pathMatch: 'full', redirectTo: 'list-notation' },
 	  { path: '**', redirectTo: 'list-notation' }
       ]
     },

@@ -1,35 +1,24 @@
 const blocMongooseModel = require('../models/blocMongooseModel');
+const blockchainMongooseModel = require('../models/blockchainMongooseModel');
+
 const D = require('../outils/debug');
 const O = require('../outils/outils');
 
-function createBlocCtrl (req, res, next) {
+function createBlocCtrl (bloc) {
     var here=O.functionNameJS();
-    if (D.debug) {console.log('entrée dans blocCtrl.js',here,'avec req.body ', req.body)};
+    if (D.debug) {console.log('Entrée dans blocCtrl.js',here,'avec bloc',bloc)};
 
-    const bloc = new blocMongooseModel({
-	index: req.body.index,
-	typeContenu: req.body.typeContenu,
-	contenu: req.body.contenu,
-	horodatage: req.body.horodatage,
-	hashPrecedent: req.body.hashPrecedent,
-	hashCourant: req.body.hashCourant,
-	clePublique: req.body.clePublique
+    const blocRecu = new blocMongooseModel({
+	index: bloc.index,
+	typeContenu: bloc.typeContenu,
+	contenu: bloc.contenu,
+	horodatage: bloc.horodatage,
+	hashPrecedent: bloc.hashPrecedent,
+	hashCourant: bloc.hashCourant,
+	clePublique: bloc.clePublique
     });
-    bloc.save()
-	.then(
-	    () => {
-		res.status(201).json({
-		    message: 'bloc sauvé !'
-		});
-	    }
-	).catch(
-	    (error) => {
-		if (D.debug) {console.log('dans blocCtrl.js.createblocctrl erreur ', error)};
-		res.status(400).json({
-		    error: error
-		});
-	    }
-	);
+    
+    return blocRecu;
 };
 
 function deleteBlocCtrl (req, res, next) {
@@ -53,6 +42,39 @@ function deleteBlocCtrl (req, res, next) {
 	);
 };
 
+function getAllBlocCtrl (req, res, next) {
+    var here=O.functionNameJS();
+    if (D.debug) {console.log('Entrée dans blocCtrl.js',here,'avec req.body ', req.body)};
+
+    var blocRecus = [];
+    req.body.forEach( bloc => {
+	console.log('bloc',bloc);
+	blocRecus.push (createBlocCtrl (bloc));
+    });
+
+    const blockchain = new blockchainMongooseModel({
+	blocs : blocRecus,
+    });
+						   
+    console.log('Dans',here,'avant le save');
+    blockchain.save()
+	.then(
+	    () => {
+		res.status(201).json({
+		    message: 'Bloc sauvé !'
+		});
+	    }
+	).catch(
+	    (error) => {
+		if (D.debug) {console.log('Dans blocCtrl.js',here,'Erreur ', error)};
+		res.status(400).json({
+		    error: error
+		});
+	    }
+	);
+        console.log('Dans',here,'après le save');
+};
+
 function getOneBlocCtrl (req, res, next) {
     var here=O.functionNameJS();
     if (D.debug) {console.log('entrée dans blocCtrl.js',here,'avec req.body ', req.body)};
@@ -68,24 +90,6 @@ function getOneBlocCtrl (req, res, next) {
 	).catch(
 	    (error) => {
 		res.status(404).json({
-		    error: error
-		});
-	    }
-	);
-};
-
-function getAllBlocCtrl (req, res, next) {
-    var here=O.functionNameJS();
-    if (D.debug) {console.log('entrée dans blocCtrl.js',here,'avec req.body ', req.body)};
-
-    blocMongooseModel.find()
-	.then(
-	    (des_blocs) => {
-		res.status(200).json(des_blocs);
-	    }
-	).catch(
-	    (error) => {
-		res.status(400).json({
 		    error: error
 		});
 	    }
@@ -114,7 +118,7 @@ function mineBlocCtrl (req, res, next) {
 	    }
 	).catch(
 	    (error) => {
-		if (D.debug) {console.log('Dans blockchainCtrl.js',here,'Erreur ', error)};
+		if (D.debug) {console.log('Dans blocCtrl.js',here,'Erreur ', error)};
 		res.status(400).json({
 		    error: error
 		});
@@ -173,7 +177,37 @@ function modifyBlocCtrl (req, res, next) {
 	);
 };
 
-module.exports.createBlocCtrl = createBlocCtrl;
+function saveBlocCtrl (req, res, next) {
+    var here=O.functionNameJS();
+    if (D.debug) {console.log('entrée dans blocCtrl.js',here,'avec req.body ', req.body)};
+
+    const bloc = new blocMongooseModel({
+	index: req.body.index,
+	typeContenu: req.body.typeContenu,
+	contenu: req.body.contenu,
+	horodatage: req.body.horodatage,
+	hashPrecedent: req.body.hashPrecedent,
+	hashCourant: req.body.hashCourant,
+	clePublique: req.body.clePublique
+    });
+    bloc.save()
+	.then(
+	    () => {
+		res.status(201).json({
+		    message: 'bloc sauvé !'
+		});
+	    }
+	).catch(
+	    (error) => {
+		if (D.debug) {console.log('dans blocCtrl.js.createblocctrl erreur ', error)};
+		res.status(400).json({
+		    error: error
+		});
+	    }
+	);
+};
+
+module.exports.saveBlocCtrl = saveBlocCtrl;
 module.exports.deleteBlocCtrl = deleteBlocCtrl;
 module.exports.getAllBlocCtrl = getAllBlocCtrl;
 module.exports.getOneBlocCtrl = getOneBlocCtrl;

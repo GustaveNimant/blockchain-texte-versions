@@ -1,0 +1,36 @@
+<mat-spinner *ngIf="loading"></mat-spinner>
+<div *ngIf="debug">Debug:Dans single-bloc.component.html</div>
+<div *ngIf="!loading">
+
+    <div class="single-bloc-pane">
+
+	<div class="single-bloc-info">
+	    <p>Clé publique de l'auteur : {{ currentBloc.auteurClePublique }}</p>
+	    <p>Contenu : {{ currentBloc.contenu }}</p>
+	    <button class="btn btn-success m-1"
+		    (click)="onNotate()">Noter</button>
+	    <br>
+	    <button class="btn btn-primary m-1"
+		    (click)="onDisplayNotation()">Afficher les Notations</button>
+	    <br>
+	    <button class="btn btn-success m-1"
+		    (click)="onNewBlocVersion()">Créer une nouvelle version</button>
+	    <br>
+	</div>
+	
+	<button class="btn btn-link"
+		       (click)="onGoAllBloc()"><< Retour à la liste des Blocs</button>
+
+	<p class="alert-danger"
+	   *ngIf="errorMessage">Dans single-bloc.component.html.<br>Erreur<br> {{ errorMessage }}</p>
+	
+	<p class="alert-danger" *ngIf="!isAuth"><br>
+	    Il faut <a class="header-link"
+		       routerLink="/login"
+		       routerLinkActive="active">
+	    <button class="btn btn-primary">se connecter</button>
+	    </a> pour modifier un bloc
+	</p>
+
+    </div>
+</div>

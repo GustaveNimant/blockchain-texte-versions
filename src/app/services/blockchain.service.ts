@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BlocModel } from '../models/bloc.model';
+import { BlockchainModel }    from '../../models/blockchain.model';
 import { Subject } from 'rxjs';
 import { BehaviorSubject } from 'rxjs';
 
@@ -21,13 +22,13 @@ export class Blockchainervice {
 	console.log('%cEntrée dans','color:#00aa00', here);
     };
 
-    public bloc_a: BlocModel[] = [];
-    public bloc_a$ = new BehaviorSubject<BlocModel[]>(this.bloc_a);
+    public blockchain: BlockchainModel;
+    public blockchain$ = new BehaviorSubject<BlocModel[]>(this.blockchain);
 
     emitBlockchain(caller) {
 	let here = O.functionName ();
-	console.log('%cEntrée dans','color:#00aa00',here,'avec les blockchain', this.bloc_a);
-	this.bloc_a$.next(this.bloc_a);
+	console.log('%cEntrée dans','color:#00aa00',here,'avec les blockchain', this.blockchain);
+	this.blockchain$.next(this.blockchain);
     }
 
     getBlockchain(caller) {
@@ -38,10 +39,10 @@ export class Blockchainervice {
 
 	return new Promise((resolve, reject) => {
 	    this.http.get(this.uri_all).subscribe(
-		(tex_a: BlocModel[]) => {
-		    if (tex_a) {
-			this.bloc_a = tex_a;
-			console.log('Dans',here,'bloc_a',tex_a);
+		(blo: BlockchainModel) => {
+		    if (blo) {
+			this.blockchain = blo;
+			console.log('Dans',here,'blockchain',blo);
 			this.emitBlockchain(here);
 		    }
 		},

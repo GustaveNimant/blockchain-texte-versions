@@ -3,7 +3,7 @@ export class BlocModel {
     typeContenu: string;
     contenu: string;
     horodatage: string;
-    clePublique: string;
+    auteurClePublique: string;
     hashPrecedent: string;
     hashCourant: string;
     _id: string; /* texteObjectId*/

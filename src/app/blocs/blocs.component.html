@@ -1,0 +1,21 @@
+<app-main-menu></app-main-menu>
+
+<h2>
+    Les blocs
+    <ul>
+	<li *ngIf="(!isAuth)">
+	    <a routerLink="/login"
+	       routerLinkActive="active">Login (pour entrer un nouveau bloc)</a>
+	</li>
+	<li *ngIf="(isAuth)">
+	    <a routerLink="/blocs/new-bloc"
+	       routerLinkActive="active">Entrer un nouveau bloc</a>
+	</li>
+	<li>
+	    <a routerLink="/blocs/list-bloc"
+	       routerLinkActive="active">Afficher la liste des blocs</a>
+	</li>
+    </ul>
+</h2>
+
+<router-outlet></router-outlet>

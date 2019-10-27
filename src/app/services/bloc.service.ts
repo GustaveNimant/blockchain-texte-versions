@@ -13,13 +13,16 @@ import * as process from 'process';
 
 export class BlocService {
 
-    uri_all = 'http://localhost:3000/api/bloc/';
+    uri_all = O.uriGet('BlocService') + '/api/blocs/';
     
     constructor(private http: HttpClient)
     {
 	let here = O.functionName ();
 	console.log('%cEntrée dans','color:#00aa00', here);
     };
+
+    public bloc_a: BlocModel[] = [];
+    public bloc_a$ = new BehaviorSubject<BlocModel[]>(this.bloc_a);
 
     public currentBloc = new BlocModel();
     public currentBloc$ = new BehaviorSubject<BlocModel>(this.currentBloc)
@@ -86,6 +89,12 @@ export class BlocService {
 	this.currentBloc$.next(this.currentBloc);
     }
 
+    emitBlocs(caller) {
+	let here = O.functionName ();
+	console.log('%cEntrée dans','color:#00aa00',here,'avec les blocs', this.bloc_a);
+	this.bloc_a$.next(this.bloc_a);
+    }
+
     getBlocByObjectId(blocObjectId: string) {
 	let here = O.functionName();
 	console.log('%cEntrée dans Promise','color:#0000aa',here,'avec blocObjectId',blocObjectId);
@@ -105,6 +114,40 @@ export class BlocService {
 		}
 	    );
 	});
+    }
+
+    getBlocs(caller) {
+	let here = O.functionName ();
+	console.log('%cEntrée dans Promise','color:#0000ff',here,'avec uri_all',this.uri_all);
+
+	console.log(here,'appelé par',caller);
+
+	return new Promise((resolve, reject) => {
+	    this.http.get(this.uri_all).subscribe(
+		(tex_a: BlocModel[]) => {
+		    if (tex_a) {
+			this.bloc_a = tex_a;
+			console.log('Dans',here,'bloc_a',tex_a);
+			this.emitBlocs(here);
+		    }
+		},
+		(error) => {
+		    console.log('Dans',here,'Erreur', error);
+		    console.log('Dans',here,'error.status', error.status);
+		    switch (error.status) {
+			case 0:
+			    console.log('Dans',here,'run nodemon server');
+			    break;
+			default:
+			    break;
+		    }
+		},
+		() => {
+		    console.log('%cSortie de','color:#aa0000', here);
+		}
+	    );
+	});
+	
     }
 
     modifyBloc(id: string, bloc: BlocModel) { /* update id ? */

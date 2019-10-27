@@ -1,0 +1,35 @@
+<mat-spinner *ngIf="loading"></mat-spinner>
+<div *ngIf="!loading" class="col-sm-6 offset-sm-3 mt-2">
+    <ul>
+	<li> Titre : {{bloc.titre}} </li>
+	<li>Note : {{bloc.noteMoyenne}} ({{bloc.noteEcartType}})</li>
+	<li>Shasum du contenu précédent : {{bloc.shasum}}</li>
+	<li>Id du contenu : {{bloc.blocContenuId}} ({{bloc.version}})</li>
+	<li>ObjectId : {{bloc._id}} ({{bloc.__v}})</li>
+    </ul>
+    <form [formGroup]="blocForm">
+
+	<div class="form-group">
+	    <label for="contenu">Description</label>
+	    <textarea name="contenu"
+                      id="contenu"
+                      cols="30" rows="7"
+                      class="form-control"
+                      formControlName="contenu"
+                      placeholder="Entrer votre bloc ici ..."></textarea>
+	</div>
+	
+	<button class="btn btn-success" (click)="onNewBlocVersion()"
+		       [disabled]="blocForm.invalid">Sauver la version</button>
+	
+	<p class="alert-danger" *ngIf="errorMessage"><br>
+	    Il faut <a class="header-link"
+		       routerLink="/login"
+		       routerLinkActive="active">
+	    <button class="btn btn-primary">se connecter</button>
+	    </a>
+	    pour modifier un bloc
+	</p>
+	
+    </form>
+</div>
