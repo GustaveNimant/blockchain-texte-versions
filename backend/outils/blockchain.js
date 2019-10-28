@@ -1,11 +1,11 @@
 'use strict';
-//var CryptoJS = require("crypto-js");
+var CryptoJS = require("crypto-js");
 var express = require("express");
 var bodyParser = require('body-parser');
 var WebSocket = require("ws");
 var O = require("./outils");
 
-module.exports = function generateNextBlock (blockData, caller) {
+function generateNextBlock (blockData, caller) {
     var here = O.functionNameJS();
     console.log(entering(),'Entrée dans',here,'appelé par',caller,'avec blockData',blockData);
 
@@ -18,15 +18,15 @@ module.exports = function generateNextBlock (blockData, caller) {
     return new Block(nextIndex, previousBlock.hash, nextTimestamp, blockData, nextHash);
 };
 
-var calculateHashForBlock = (block) => {
+function calculateHashForBlock (block) {
     return calculateHash(block.index, block.previousHash, block.timestamp, block.data);
 };
 
-var calculateHash = (index, previousHash, timestamp, data) => {
+function calculateHash (index, previousHash, timestamp, data) {
     return CryptoJS.SHA256(index + previousHash + timestamp + data).toString();
 };
 
-var addBlock = (newBlock,caller) => {
+function addBlock (newBlock,caller) {
     var here = functionNameJS ();
     console.log(entering(),'Entrée dans',here,'appelé par',caller,'avec newBlock',newBlock);
 
@@ -36,7 +36,7 @@ var addBlock = (newBlock,caller) => {
     console.log(exiting(),'Sortie  de ',here);
 };
 
-var isValidNewBlock = (newBlock, previousBlock) => {
+function isValidNewBlock (newBlock, previousBlock) {
     var here = functionNameJS ();
     
     if (previousBlock.index + 1 !== newBlock.index) {
@@ -57,11 +57,17 @@ var isValidNewBlock = (newBlock, previousBlock) => {
     return true;
 };
 
-var broadcast = (message,caller) => {
+function broadcast_to_sockets (message, socket_a, caller) {
     var here = functionNameJS();
     console.log(entering(),'Entrée dans',here,'appelé par',caller,'avec message',message);
 
-    sockets.forEach(socket => write(socket, message));
+    socket_a.forEach (soc => write(soc, message));
     console.log(exiting(),'Sortie  de ',here);
 }
 
+module.exports.broadcast_to_sockets = broadcast_to_sockets;
+module.exports.calculateHash = calculateHash;
+module.exports.calculateHashForBlock = calculateHashForBlock;
+module.exports.calculateHashForBlock = calculateHashForBlock;
+module.exports.generateNextBlock = generateNextBlock;
+module.exports.isValidNewBlock = isValidNewBlock;

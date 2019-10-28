@@ -16,12 +16,16 @@
 	<div class="bloc-info">
 	    <h5>
 		<ul>
-		    <li *ngIf="verbose">Pseudo de l'auteur: {{ un_bloc.pseudo }}</li>
-		    <li>Clé publique de l'auteur: {{ un_bloc.auteurClePublique }}</li>
+		    <li>Horodatage:<br> {{ un_bloc.horodatage }}</li>
+
+		    <li *ngIf="verbose">Pseudo de l'auteur:<br> {{ un_bloc.pseudo }}</li>
+		    <li>Clé publique de l'auteur:<br> {{ un_bloc.auteurClePublique }}</li>
+		    <li>Index du bloc:<br> {{ un_bloc.index }}</li>
+
+		    <li>Hash du bloc précédent:<br> {{ un_bloc.hashPrecedent }}</li>
 		</ul>
 	    </h5>
 	</div>
-	Bloc :
 	<div class="bloc-contenu">
 	    <p>{{ un_bloc.contenu }}</p>
 	</div>

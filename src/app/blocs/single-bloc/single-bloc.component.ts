@@ -60,10 +60,10 @@ export class SingleBlocComponent implements OnInit, OnDestroy {
 		console.log('Dans',here,' params', params);
 		this.blocService.getBlocByObjectId(params.id)
 		    .then(
-			(tex: BlocModel) => {
+			(blo: BlocModel) => {
 			    this.loading = false;
-			    this.currentBloc = tex;
-			    console.log('Dans',here,'getBlocByObjectId tex',tex);
+			    this.currentBloc = blo;
+			    console.log('Dans',here,'getBlocByObjectId blo',blo);
 			}
 		    ).catch(
 			(error) => {
@@ -83,9 +83,9 @@ export class SingleBlocComponent implements OnInit, OnDestroy {
 	);
 	
 	this.currentBlocSub = this.blocService.currentBloc$.subscribe(
-	    (tex) => {
-		console.log('Dans',here,'subscribe tex',tex);
-		this.currentBloc = tex;
+	    (blo) => {
+		console.log('Dans',here,'subscribe blo',blo);
+		this.currentBloc = blo;
 		this.loading = false;
 	    }
 	);
