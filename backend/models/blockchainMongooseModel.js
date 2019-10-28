@@ -9,7 +9,7 @@ const blocSchema = new Schema({
     horodatage: { type: String},
     hashPrecedent: { type: String},
     hashCourant: { type: String},
-    clePublique: { type: String},
+    auteurClePublique: { type: String},
 },{
     collection : 'bloc_c'
 });
@@ -21,3 +21,4 @@ const blockchainSchema = new Schema({
 });
 
 module.exports = mongoose.model('blockchainMongooseModel', blockchainSchema);
+

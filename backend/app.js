@@ -24,7 +24,7 @@ app.use((req, res, next) => { /* no route : applies to all incoming requests */
 
 app.use(bodyParser.json());              /* reception de la requête sous forme d'Objet JSON */
 
-app.use('/api/bloc', blocRoutes);
+app.use('/api/blocs', blocRoutes);
 app.use('/api/blockchain', blockchainRoutes);
 app.use('/api/pairs', pairRoutes);
 app.use('/api/profils', profilRoutes);

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { BlocModel } from '../models/bloc.model';
-import { BlockchainModel }    from '../../models/blockchain.model';
+import { BlocModel }       from '../models/bloc.model';
+import { BlockchainModel } from '../models/blockchain.model';
 import { Subject } from 'rxjs';
 import { BehaviorSubject } from 'rxjs';
 
@@ -12,7 +12,7 @@ import * as process from 'process';
     providedIn: 'root'
 })
 
-export class Blockchainervice {
+export class BlockchainService {
 
     uri_all = 'http://localhost:3000/api/blockchain/';
     
@@ -22,12 +22,12 @@ export class Blockchainervice {
 	console.log('%cEntrée dans','color:#00aa00', here);
     };
 
-    public blockchain: BlockchainModel;
-    public blockchain$ = new BehaviorSubject<BlocModel[]>(this.blockchain);
+    private blockchain = new BlockchainModel();
+    public blockchain$ = new BehaviorSubject<BlockchainModel>(this.blockchain);
 
     emitBlockchain(caller) {
 	let here = O.functionName ();
-	console.log('%cEntrée dans','color:#00aa00',here,'avec les blockchain', this.blockchain);
+	console.log('%cEntrée dans','color:#00aa00',here,'avec la blockchain', this.blockchain);
 	this.blockchain$.next(this.blockchain);
     }
 

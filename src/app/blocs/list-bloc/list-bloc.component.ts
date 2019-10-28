@@ -96,9 +96,9 @@ export class ListBlocComponent implements OnInit, OnDestroy {
 
 	this.bloc_aSub = this.blocService.bloc_a$
 			      .subscribe(
-				  (tex_a) => {
-				      this.bloc_a = tex_a;
-				      console.log('Dans',here,'subscribe tex_a',tex_a);
+				  (blo_a) => {
+				      this.bloc_a = blo_a;
+				      console.log('Dans',here,'subscribe blo_a',blo_a);
 				  },
 				  (error) =>
 				      {console.log(error)

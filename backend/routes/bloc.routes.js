@@ -3,8 +3,8 @@ const router = express.Router();
 
 const blocCtrl = require('../controllers/blocCtrl');
 
-router.get('/',   blocCtrl.getAllBlocCtrl);
-router.post('/',  blocCtrl.getAllBlocCtrl);
+router.get('/', blocCtrl.getAllBlocCtrl);
+router.post('/', blocCtrl.getAllBlocCtrl);
 router.post('/mineBlock',  blocCtrl.mineBlocCtrl);
 router.get('/:id',   blocCtrl.getOneBlocCtrl);
 router.put('/:id',  blocCtrl.modifyBlocCtrl);

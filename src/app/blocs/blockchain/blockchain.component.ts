@@ -1,17 +1,16 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ProfilService }   from '../../services/profil.service';
-import { NotationService } from '../../services/notation.service';
 import { StateService }    from '../../services/state.service';
-import { BlocService }    from '../../services/bloc.service';
-import { Router } from '@angular/router';
-import { BlocModel }    from '../../models/bloc.model';
-import { BlockchainModel }    from '../../models/blockchain.model';
+import { BlockchainService } from '../../services/blockchain.service';
+import { BlockchainModel }   from '../../models/blockchain.model';
+import { BlocModel }         from '../../models/bloc.model';
 import { ProfilModel }   from '../../models/profil.model';
 import { NotationModel } from '../../models/notation.model';
 
 import { Subscription } from 'rxjs';
-import { filter, map, scan, take, tap, toArray } from 'rxjs/operators';
-import { arrayCountSumAverageRms, sumOfArray, averageOfArray, varianceOfArray, rmsOfArray }  from '../../outils/outils-statistics';
+
+import { Router } from '@angular/router';
+
 
 import * as O from '../../outils/outils-management';
 
@@ -34,8 +33,8 @@ export class BlockchainComponent implements OnInit, OnDestroy {
     private verboseSub: Subscription;
     public verbose: boolean;
 
-    public bloc_a = new Array<BlocModel>();
-    private bloc_aSub: Subscription;
+    public blockchain = new BlockchainModel();
+    private blockchainSub: Subscription;
 
     private profil_aSub:Subscription;
     private profil_a = new Array<ProfilModel>();
@@ -49,16 +48,11 @@ export class BlockchainComponent implements OnInit, OnDestroy {
     private average: number;
     private rms: number;
 
-    private notation_aSub:Subscription;
-    private notation_a = new Array<NotationModel>();
-    private currentNotation_a = new Array<NotationModel>();
-
     public debug: boolean;
 
     constructor(private stateService: StateService,
 		private profilService: ProfilService,
-		private notationService: NotationService,
-		private blocService: BlocService,
+		private blockchainService: BlockchainService,
 		private router: Router)
 		{
 		    let here = O.functionName ();
@@ -93,13 +87,13 @@ export class BlockchainComponent implements OnInit, OnDestroy {
 	    }
 	);
 
-	console.log('\nDEBUG------- avant this.blocService.bloc_a$.subscribe ---------\n');
+	console.log('\nDEBUG------- avant this.blockchainService.blockchain$.subscribe ---------\n');
 
-	this.bloc_aSub = this.blocService.bloc_a$
+	this.blockchainSub = this.blockchainService.blockchain$
 			      .subscribe(
-				  (tex_a) => {
-				      this.bloc_a = tex_a;
-				      console.log('Dans',here,'subscribe tex_a',tex_a);
+				  (blo) => {
+				      this.blockchain = blo[0];
+				      console.log('Dans',here,'subscribe blo',blo);
 				  },
 				  (error) =>
 				      {console.log(error)
@@ -109,10 +103,10 @@ export class BlockchainComponent implements OnInit, OnDestroy {
 				  }
 			      );
 
-	console.log('\nDEBUG------- après this.blocService.bloc_a$.subscribe ---------\n');
-	console.log('\nDEBUG------- avant this.blocService.getBlocs  ---------\n');	this.loading = false;
+	console.log('\nDEBUG------- après this.blockchainService.blockchain$.subscribe ---------\n');
+	console.log('\nDEBUG------- avant this.blockchainService.getBlocs  ---------\n');	this.loading = false;
 
-	this.blocService.getBlocs(here) /* afficher les blocs */
+	this.blockchainService.getBlockchain(here) /* afficher les blocs */
 	    .then(
 		() => {
 		    this.loading = false;
@@ -126,7 +120,7 @@ export class BlockchainComponent implements OnInit, OnDestroy {
 		}
 	    );
 
-	console.log('\nDEBUG------- après this.blocService.getBlocs  ---------\n');
+	console.log('\nDEBUG------- après this.blockchainService.getBlocs  ---------\n');
 
     }
 
@@ -144,9 +138,9 @@ export class BlockchainComponent implements OnInit, OnDestroy {
 	let here = O.functionName ();
 	console.log('%cEntrée dans','color:#00aa00', here);
 
-	this.bloc_aSub.unsubscribe();
+	this.blockchainSub.unsubscribe();
 
-	O.unsubscribeLog(here, 'bloc_aSub');
+	O.unsubscribeLog(here, 'blockchainSub');
 	O.exiting_from_function (here);
     }
 

@@ -13,9 +13,9 @@ function createBlocCtrl (bloc) {
 	typeContenu: bloc.typeContenu,
 	contenu: bloc.contenu,
 	horodatage: bloc.horodatage,
+	auteurClePublique: bloc.auteurClePublique,
 	hashPrecedent: bloc.hashPrecedent,
 	hashCourant: bloc.hashCourant,
-	clePublique: bloc.clePublique
     });
     
     return blocRecu;
@@ -46,33 +46,19 @@ function getAllBlocCtrl (req, res, next) {
     var here=O.functionNameJS();
     if (D.debug) {console.log('Entrée dans blocCtrl.js',here,'avec req.body ', req.body)};
 
-    var blocRecus = [];
-    req.body.forEach( bloc => {
-	console.log('bloc',bloc);
-	blocRecus.push (createBlocCtrl (bloc));
-    });
-
-    const blockchain = new blockchainMongooseModel({
-	blocs : blocRecus,
-    });
-						   
-    console.log('Dans',here,'avant le save');
-    blockchain.save()
+        blocMongooseModel.find()
 	.then(
-	    () => {
-		res.status(201).json({
-		    message: 'Bloc sauvé !'
-		});
+	    (blo_a) => {
+		if (D.debug) {console.log('Dans blocCtrl.js',here,'blo_a',blo_a)};
+		res.status(200).json(blo_a);
 	    }
 	).catch(
 	    (error) => {
-		if (D.debug) {console.log('Dans blocCtrl.js',here,'Erreur ', error)};
 		res.status(400).json({
 		    error: error
 		});
 	    }
 	);
-        console.log('Dans',here,'après le save');
 };
 
 function getOneBlocCtrl (req, res, next) {
@@ -100,15 +86,10 @@ function mineBlocCtrl (req, res, next) {
     var here=O.functionNameJS();
     if (D.debug) {console.log('entrée dans blocCtrl.js',here,'avec req.body ', req.body)};
 
-    const blocRecu = new blocMongooseModel({
-	index: req.body.index,
-	typecontenu: req.body.typecontenu,
-	contenu: req.body.contenu,
-	horodatage: req.body.horodatage,
-	hashPrecedent: req.body.hashPrecedent,
-	hashCourant: req.body.hashCourant,
-	clePublique: req.body.clePublique
-    });
+    const blocRecu = createBlocCtrl (req.body);
+    
+    if (D.debug) {console.log('Dans blocCtrl.js',here,'bloc reçu',blocRecu)};
+    
     blocRecu.save()
 	.then(
 	    () => {
@@ -124,22 +105,7 @@ function mineBlocCtrl (req, res, next) {
 		});
 	    }
 	);
-    if (D.debug) {console.log('Dans blocCtrl.js',here,'bloc reçu',blocRecu)};
-    blocRecu.save()
-	.then(
-	    () => {
-		res.status(201).json({
-		    message: 'Bloc sauvé !'
-		});
-	    }
-	).catch(
-	    (error) => {
-		if (D.debug) {console.log('Dans blocCtrl.js',here,'Erreur ', error)};
-		res.status(400).json({
-		    error: error
-		});
-	    }
-	);
+    
 };
 
 function modifyBlocCtrl (req, res, next) {
@@ -154,7 +120,7 @@ function modifyBlocCtrl (req, res, next) {
 	horodatage: req.body.horodatage,
 	hashPrecedent: req.body.hashPrecedent,
 	hashCourant: req.body.hashCourant,
-	clePublique: req.body.clePublique,
+	auteurClePublique: req.body.auteurClePublique,
 	_id: req.params.id, /* to keep the_id */
 	__v: req.body.__v
     });
@@ -188,7 +154,7 @@ function saveBlocCtrl (req, res, next) {
 	horodatage: req.body.horodatage,
 	hashPrecedent: req.body.hashPrecedent,
 	hashCourant: req.body.hashCourant,
-	clePublique: req.body.clePublique
+	auteurClePublique: req.body.auteurClePublique
     });
     bloc.save()
 	.then(
