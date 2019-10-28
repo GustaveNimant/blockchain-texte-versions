@@ -1,29 +1,29 @@
-const blockchainMongooseModel = require('../models/blockchainMongooseModel');
-const blocMongooseModel = require('../models/blocMongooseModel');
+const blockchainMongooseModel = require('../models/blockchain.mongoose.model');
+const blocMongooseModel = require('../models/bloc.mongoose.model');
 
 const D = require('../outils/debug');
 const O = require('../outils/outils');
 
-function createBlocCtrl (bloc) {
+function createBlocController (bloc) {
     var here=O.functionNameJS();
-    if (D.debug) {console.log('Entrée dans blockchainCtrl.js',here,'avec bloc',bloc)};
+    if (D.debug) {console.log('Entrée dans blockchainController.js',here,'avec bloc',bloc)};
 
     const blocRecu = new blocMongooseModel({
 	index: bloc.index,
 	typeContenu: bloc.typeContenu,
 	contenu: bloc.contenu,
 	horodatage: bloc.horodatage,
+	auteurClePublique: bloc.auteurClePublique,
 	hashPrecedent: bloc.hashPrecedent,
 	hashCourant: bloc.hashCourant,
-	auteurClePublique: bloc.auteurClePublique
     });
     
     return blocRecu;
 };
 
-function getBlockchainCtrl (req, res, next) {
+function getBlockchainController (req, res, next) {
     var here=O.functionNameJS();
-    if (D.debug) {console.log('Entrée dans blockchainCtrl.js',here,'avec req.body ', req.body)};
+    if (D.debug) {console.log('Entrée dans blockchainController.js',here,'avec req.body ', req.body)};
 
     blockchainMongooseModel.find()
 	.then(
@@ -40,14 +40,14 @@ function getBlockchainCtrl (req, res, next) {
 	);
 };
 
-function submitBlockchainCtrl (req, res, next) {
+function submitBlockchainController (req, res, next) {
     var here=O.functionNameJS();
-    if (D.debug) {console.log('Entrée dans blockchainCtrl.js',here,'avec req.body ', req.body)};
+    if (D.debug) {console.log('Entrée dans blockchainController.js',here,'avec req.body ', req.body)};
 
     var blocRecus = [];
     req.body.forEach( bloc => {
 	console.log('bloc',bloc);
-	blocRecus.push (createBlocCtrl (bloc));
+	blocRecus.push (createBlocController (bloc));
     });
 
     const blockchain = new blockchainMongooseModel({
@@ -64,7 +64,7 @@ function submitBlockchainCtrl (req, res, next) {
 	    }
 	).catch(
 	    (error) => {
-		if (D.debug) {console.log('Dans blockchainCtrl.js.createBlockchainCtrl Erreur ', error)};
+		if (D.debug) {console.log('Dans blockchainController.js.createBlockchainController Erreur ', error)};
 		res.status(400).json({
 		    error: error
 		});
@@ -73,6 +73,6 @@ function submitBlockchainCtrl (req, res, next) {
         console.log('Dans',here,'après le save');
 };
 
-module.exports.getBlockchainCtrl = getBlockchainCtrl;
-module.exports.createBlocCtrl = createBlocCtrl;
-module.exports.submitBlockchainCtrl = submitBlockchainCtrl;
+module.exports.getBlockchainController = getBlockchainController;
+module.exports.createBlocController = createBlocController;
+module.exports.submitBlockchainController = submitBlockchainController;

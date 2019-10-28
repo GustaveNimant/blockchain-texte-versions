@@ -4,12 +4,12 @@ const router = express.Router();
 const auth = require('../middleware/auth');
 const multer = require('../middleware/multer-config')
 
-const pairCtrl = require('../controllers/pairCtrl');
+const pairController = require('../controllers/pair.controller');
 
-router.get('/', pairCtrl.getAllPairCtrl);
-router.post('/', auth, pairCtrl.createPairCtrl); /* post route modified */
-router.get('/:id', pairCtrl.getOnePairCtrl);
-router.put('/:id', auth, multer, pairCtrl.modifyPairCtrl);  /* put  route modified */
-router.delete('/:id', auth, pairCtrl.deletePairCtrl);
+router.get('/', pairController.getAllPairController);
+router.post('/', auth, pairController.createPairController); /* post route modified */
+router.get('/:id', pairController.getOnePairController);
+router.put('/:id', auth, multer, pairController.modifyPairController);  /* put  route modified */
+router.delete('/:id', auth, pairController.deletePairController);
 
 module.exports = router;

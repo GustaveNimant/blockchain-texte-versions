@@ -8,4 +8,4 @@ const pairSchema = new Schema({
     collection : 'pair_c'
 });
 
-module.exports = mongoose.model('pairMongooseModel', pairSchema);
+module.exports = mongoose.model('pair.mongoose.model', pairSchema);

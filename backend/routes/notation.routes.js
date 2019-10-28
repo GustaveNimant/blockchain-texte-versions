@@ -4,13 +4,13 @@ const router = express.Router();
 const auth = require('../middleware/auth');
 const multer = require('../middleware/multer-config')
 
-const notationCtrl = require('../controllers/notationCtrl');
+const notationController = require('../controllers/notation.controller');
 
-router.get('/', notationCtrl.getAllNotationCtrl);
-router.post('/', auth, notationCtrl.createNotationCtrl); 
-router.get('/:id', auth, notationCtrl.getOneNotationCtrl);
-router.get('/byoid/:texteObjectId', notationCtrl.getNotationsByTexteObjectIdCtrl);
-router.get('/oandp/:TexteObjectIdAndParticipantId', notationCtrl.getNotationsByTexteObjectIdAndParticipantIdCtrl);
-router.delete('/:id', auth, notationCtrl.deleteNotationCtrl);
+router.get('/', notationController.getAllNotationController);
+router.post('/', auth, notationController.createNotationController); 
+router.get('/:id', auth, notationController.getOneNotationController);
+router.get('/byoid/:texteObjectId', notationController.getNotationsByTexteObjectIdController);
+router.get('/oandp/:TexteObjectIdAndParticipantId', notationController.getNotationsByTexteObjectIdAndParticipantIdController);
+router.delete('/:id', auth, notationController.deleteNotationController);
 
 module.exports = router;

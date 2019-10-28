@@ -4,13 +4,13 @@ const router = express.Router();
 const auth = require('../middleware/auth');
 const multer = require('../middleware/multer-config')
 
-const texteCtrl = require('../controllers/texteCtrl');
+const texteController = require('../controllers/texte.controller');
 
-router.get('/', texteCtrl.getAllTexteCtrl);
-router.post('/', auth, texteCtrl.createTexteCtrl); /* post route modified */
-router.post('/:id', auth, texteCtrl.createTexteCtrl); /* post route modified */ 
-router.get('/:id', texteCtrl.getOneTexteCtrl);
-router.put('/:id', auth, multer, texteCtrl.modifyTexteCtrl);  /* put  route modified */
-router.delete('/:id', auth, texteCtrl.deleteTexteCtrl);
+router.get('/', texteController.getAllTexteController);
+router.post('/', auth, texteController.createTexteController); /* post route modified */
+router.post('/:id', auth, texteController.createTexteController); /* post route modified */ 
+router.get('/:id', texteController.getOneTexteController);
+router.put('/:id', auth, multer, texteController.modifyTexteController);  /* put  route modified */
+router.delete('/:id', auth, texteController.deleteTexteController);
 
 module.exports = router;

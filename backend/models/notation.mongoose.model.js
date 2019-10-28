@@ -10,4 +10,4 @@ const notationSchema = new Schema({
     collection : 'notation_c'			    
 });
 
-module.exports = mongoose.model('notationMongooseModel', notationSchema);
+module.exports = mongoose.model('notation.mongoose.model', notationSchema);

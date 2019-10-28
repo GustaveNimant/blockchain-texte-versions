@@ -1,13 +1,13 @@
 const express = require('express');
 const router = express.Router();
 
-const blocCtrl = require('../controllers/blocCtrl');
+const blocController = require('../controllers/bloc.controller');
 
-router.get('/', blocCtrl.getAllBlocCtrl);
-router.post('/', blocCtrl.getAllBlocCtrl);
-router.post('/mineBlock',  blocCtrl.mineBlocCtrl);
-router.get('/:id',   blocCtrl.getOneBlocCtrl);
-router.put('/:id',  blocCtrl.modifyBlocCtrl);
-router.delete('/:id',   blocCtrl.deleteBlocCtrl);
+router.get('/', blocController.getAllBlocController);
+router.post('/', blocController.getAllBlocController);
+router.post('/mineBlock',  blocController.mineBlocController);
+router.get('/:id',   blocController.getOneBlocController);
+router.put('/:id',  blocController.modifyBlocController);
+router.delete('/:id',   blocController.deleteBlocController);
 
 module.exports = router;

@@ -8,4 +8,4 @@ const texteSchema = new Schema({
     collection : 'texte_c'
 });
 
-module.exports = mongoose.model('texteMongooseModel', texteSchema);
+module.exports = mongoose.model('texte.mongoose.model', texteSchema);

@@ -1,15 +1,15 @@
 const express = require('express');
 const profilRoutes = express.Router();
 
-const profilCtrl = require('../controllers/profilCtrl');
+const profilController = require('../controllers/profil.controller');
 //const auth = require('../middleware/auth');
 
-profilRoutes.post('/signup', profilCtrl.signup);
-profilRoutes.post('/login', profilCtrl.login); 
-profilRoutes.get('/',   profilCtrl.getAllProfilCtrl);
-profilRoutes.post('/',  profilCtrl.createProfilCtrl);
-profilRoutes.get('/:id',   profilCtrl.getOneProfilByAnyIdCtrl);
-profilRoutes.put('/:id',  profilCtrl.modifyProfilCtrl);
-profilRoutes.delete('/:id',   profilCtrl.deleteProfilCtrl);
+profilRoutes.post('/signup', profilController.signup);
+profilRoutes.post('/login', profilController.login); 
+profilRoutes.get('/',   profilController.getAllProfilController);
+profilRoutes.post('/',  profilController.createProfilController);
+profilRoutes.get('/:id',   profilController.getOneProfilByAnyIdController);
+profilRoutes.put('/:id',  profilController.modifyProfilController);
+profilRoutes.delete('/:id',   profilController.deleteProfilController);
 
 module.exports = profilRoutes;

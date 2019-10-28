@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-const blocMongooseModel = require('./blocMongooseModel');
+const blocMongooseModel = require('./bloc.mongoose.model');
 
 const blocSchema = new Schema({
     index: { type: Number, required: true },
@@ -20,5 +20,5 @@ const blockchainSchema = new Schema({
     collection : 'blockchain_c'
 });
 
-module.exports = mongoose.model('blockchainMongooseModel', blockchainSchema);
+module.exports = mongoose.model('blockchain.mongoose.model', blockchainSchema);
 
