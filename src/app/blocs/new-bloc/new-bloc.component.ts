@@ -9,7 +9,8 @@ import { StateService }      from '../../services/state.service';
 
 import { Subscription } from 'rxjs';
 
-import * as O from '../../outils/outils-management';
+import * as M from '../../outils/outils-management';
+//import * as T from '../../outils/outils-temporary';
 
 @Component({
     selector: 'app-new-bloc',
@@ -43,12 +44,12 @@ export class NewBlocComponent implements OnInit, OnDestroy {
 	private stateService: StateService,
     	private router: Router,
     )	{
-	    let here = O.functionName ();
+	    let here = M.functionName ();
 	    console.log('%cEntrée dans','color:#00aa00', here);
 	}
 
     ngOnInit() {
-	let here = O.functionName ();
+	let here = M.functionName ();
 	console.log('%cEntrée dans','color:#00aa00', here);
 	
 	this.stateService.mode$.next('form');
@@ -99,16 +100,21 @@ export class NewBlocComponent implements OnInit, OnDestroy {
 	this.loading = true;
 
 	/* copie le contenu du blocForm */
-	var bloc = new BlocModel();
-	bloc = this.blocPrecedent;
+	var newBloc = new BlocModel();
+	newBloc = this.blocPrecedent;
 	
-	bloc.contenu = this.blocForm.get('contenu').value;
-	bloc.auteurClePublique = this.blocForm.get('auteurClePublique').value;
-	bloc._id = new Date().getTime().toString();
+	newBloc.contenu = this.blocForm.get('contenu').value;
+	newBloc.auteurClePublique = this.blocForm.get('auteurClePublique').value;
+	newBloc.index = this.blocPrecedent.index + 1;
+	newBloc._id = new Date().getTime().toString();
+	newBloc.horodatage = (new Date().getTime() / 1000).toString();
+	newBloc.hashPrecedent = newBloc.hashPrecedent;
+	//       newBloc.hashCourant = T.calculateHash (newBloc.index, newBloc.hashPrecedent, newBloc.horodatage, newBloc.contenu);
 
-	console.log('Dans onSubmit bloc', bloc);
+	newBloc.hashCourant = "hash bidon";
+	console.log('Dans onSubmit newBloc', newBloc);
 	
-	this.blocService.createNewBloc(bloc)
+	this.blocService.createNewBloc(newBloc)
 	    .then(
 		() => {
 		    this.blocForm.reset();

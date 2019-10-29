@@ -5,9 +5,9 @@ import { BlocModel } from '../../models/bloc.model';
 import { StateService }  from '../../services/state.service';
 import { BlocService } from '../../services/bloc.service';
 import { Subscription } from 'rxjs';
-import { createSha } from '../../outils/outils-management';
 
-import * as O from '../../outils/outils-management';
+import * as B from '../../outils/outils-blockchain';
+import * as M from '../../outils/outils-management';
 
 @Component({
     selector: 'app-new-bloc-version',
@@ -31,7 +31,7 @@ export class NewBlocVersionComponent implements OnInit {
 		private blocService: BlocService) { }
 
     ngOnInit() {
-	let here = O.functionName ();
+	let here = M.functionName ();
 	console.log('%cEntrée dans','color:#00aa00', here);
 
 	this.loading = true;
@@ -60,7 +60,7 @@ export class NewBlocVersionComponent implements OnInit {
     }
 
     onNewBlocVersion() {
-	let here = O.functionName ();
+	let here = M.functionName ();
 	console.log('%cEntrée dans','color:#00aa00', here);
 
 	this.loading = true;

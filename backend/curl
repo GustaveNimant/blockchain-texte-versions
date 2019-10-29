@@ -1,4 +1,0 @@
-curl -H "Content-type:application/json" --data '{"index" : 0, "typeContenu": "texte","contenu": "Ceci est une texte","horodatage": "22 octobre 2019","hashPrecedent": "snsjhjd","hashCourant": "atztzyezyey","auteurClePublique": "adsrsstzyetzye"}' http://88.191.137.54:3000/api/bloc/mineBlock
-
-
-curl -H "Content-type:application/json" --data '{"index" : 0, "typeContenu": "texte"}' http://88.191.137.54:3000/api/bloc/mineBlock

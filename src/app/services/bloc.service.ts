@@ -4,7 +4,7 @@ import { BlocModel } from '../models/bloc.model';
 import { Subject } from 'rxjs';
 import { BehaviorSubject } from 'rxjs';
 
-import * as O from '../outils/outils-management';
+import * as M from '../outils/outils-management';
 import * as process from 'process';
 
 @Injectable({
@@ -13,11 +13,11 @@ import * as process from 'process';
 
 export class BlocService {
 
-    uri_all = O.uriGet('BlocService') + '/api/blocs/';
+    uri_all = M.uriGet('BlocService') + '/api/blocs/';
     
     constructor(private http: HttpClient)
     {
-	let here = O.functionName ();
+	let here = M.functionName ();
 	console.log('%cEntrée dans','color:#00aa00', here);
     };
 
@@ -28,7 +28,7 @@ export class BlocService {
     public currentBloc$ = new BehaviorSubject<BlocModel>(this.currentBloc)
     
     createNewBloc(bloc: BlocModel) {
-	let here = O.functionName ();
+	let here = M.functionName ();
 	console.log('%cEntrée dans Promise','color:#0000aa',here,'avec bloc', bloc);
 
 	return new Promise((resolve, reject) => {
@@ -49,7 +49,7 @@ export class BlocService {
     }
     
     createNewBlocVersion(blocObjectId: string, bloc: BlocModel) { /* blocObjectId  conservé */
-	let here = O.functionName ();
+	let here = M.functionName ();
 	console.log('%cEntrée dans Promise','color:#0000aa',here,'avec blocObjectId',blocObjectId);
 
 	return new Promise((resolve, reject) => {
@@ -65,7 +65,7 @@ export class BlocService {
     }
 
     deleteBloc(blocObjectId: string) {
-	let here = O.functionName ();
+	let here = M.functionName ();
 	console.log('%cEntrée dans Promise','color:#0000aa',here,'avec blocObjectId',blocObjectId);
 	console.log('Dans',here,'uri_all',this.uri_all);
 	
@@ -82,7 +82,7 @@ export class BlocService {
     }
 
     emitCurrentBloc(caller) {
-	let here = O.functionName ();
+	let here = M.functionName ();
 	console.log('%cEntrée dans','color:#00aa00',here,'avec currentBloc',this.currentBloc);
 	console.log(here,'appelé par',caller);
 	
@@ -90,13 +90,13 @@ export class BlocService {
     }
 
     emitBlocs(caller) {
-	let here = O.functionName ();
+	let here = M.functionName ();
 	console.log('%cEntrée dans','color:#00aa00',here,'avec les blocs', this.bloc_a);
 	this.bloc_a$.next(this.bloc_a);
     }
 
     getBlocByObjectId(blocObjectId: string) {
-	let here = O.functionName();
+	let here = M.functionName();
 	console.log('%cEntrée dans Promise','color:#0000aa',here,'avec blocObjectId',blocObjectId);
 	console.log('Dans',here,'uri_all',this.uri_all);
 
@@ -117,7 +117,7 @@ export class BlocService {
     }
 
     getBlocs(caller) {
-	let here = O.functionName ();
+	let here = M.functionName ();
 	console.log('%cEntrée dans Promise','color:#0000ff',here,'avec uri_all',this.uri_all);
 
 	console.log(here,'appelé par',caller);
@@ -151,7 +151,7 @@ export class BlocService {
     }
 
     modifyBloc(id: string, bloc: BlocModel) { /* update id ? */
-	let here = O.functionName ();
+	let here = M.functionName ();
 	console.log('%cEntrée dans','color!#00aa00','avec id',id, 'et bloc', bloc);
 
 	return new Promise((resolve, reject) => {
@@ -167,7 +167,7 @@ export class BlocService {
     }
 
     provideBlocByObjectId (blocObjectId: string) {
-	let here = O.functionName();
+	let here = M.functionName();
 	console.log('%cEntrée dans','color!#00aa00','avec blocObjectId', blocObjectId);
 
 	this.getBlocByObjectId (blocObjectId)

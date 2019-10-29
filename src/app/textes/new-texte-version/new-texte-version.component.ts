@@ -5,9 +5,8 @@ import { TexteModel } from '../../models/texte.model';
 import { StateService }  from '../../services/state.service';
 import { TexteService } from '../../services/texte.service';
 import { Subscription } from 'rxjs';
-import { createSha } from '../../outils/outils-management';
 
-import * as O from '../../outils/outils-management';
+import * as M from '../../outils/outils-management';
 
 @Component({
     selector: 'app-new-texte-version',
@@ -31,7 +30,7 @@ export class NewTexteVersionComponent implements OnInit {
 		private texteService: TexteService) { }
 
     ngOnInit() {
-	let here = O.functionName ();
+	let here = M.functionName ();
 	console.log('%cEntrée dans','color:#00aa00', here);
 
 	this.loading = true;
@@ -60,7 +59,7 @@ export class NewTexteVersionComponent implements OnInit {
     }
 
     onNewTexteVersion() {
-	let here = O.functionName ();
+	let here = M.functionName ();
 	console.log('%cEntrée dans','color:#00aa00', here);
 
 	this.loading = true;
