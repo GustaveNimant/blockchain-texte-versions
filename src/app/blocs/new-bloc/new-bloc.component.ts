@@ -9,7 +9,7 @@ import { StateService }      from '../../services/state.service';
 
 import { Subscription } from 'rxjs';
 
-import * as M from '../../outils/outils-management';
+import * as M from '../../outils/management-outils';
 //import * as T from '../../outils/outils-temporary';
 
 @Component({

@@ -1,6 +1,6 @@
 import { WebSocket } from 'ws';
 import * as shajs from 'sha.js';
-import * as M from './outils-management';
+import * as M from './management-outils';
 
 export function calculateHashForBlock (block) {
     return calculateHash(block.index, block.previousHash, block.timestamp, block.data);

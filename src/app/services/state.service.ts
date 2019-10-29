@@ -1,7 +1,7 @@
 import { BehaviorSubject, Subject } from 'rxjs';
 import { Injectable } from '@angular/core';
 
-import * as O from '../outils/outils-management';
+import * as O from '../outils/management-outils';
 
 @Injectable({
     providedIn: 'root'

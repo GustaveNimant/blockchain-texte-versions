@@ -5,7 +5,7 @@ import { Subject } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { ProfilModel } from '../models/profil.model';
 
-import * as O from '../outils/outils-management';
+import * as O from '../outils/management-outils';
 
 @Injectable({
     providedIn: 'root'

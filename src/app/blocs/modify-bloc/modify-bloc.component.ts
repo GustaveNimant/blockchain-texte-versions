@@ -6,7 +6,7 @@ import { StateService }  from '../../services/state.service';
 import { BlocService } from '../../services/bloc.service';
 import { Subscription } from 'rxjs';
 
-import * as O from '../../outils/outils-management';
+import * as O from '../../outils/management-outils';
 
 @Component({
     selector: 'app-modify-bloc',

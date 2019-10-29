@@ -6,9 +6,9 @@ import { NotationService }                    from '../../services/notation.serv
 import { TexteService }       from '../../services/texte.service';
 import { StateService }                       from '../../services/state.service';
 import { Subscription }                       from 'rxjs';
-import { sumOfArray, averageOfArray, varianceOfArray, rmsOfArray }  from '../../outils/outils-statistics';
+import { sumOfArray, averageOfArray, varianceOfArray, rmsOfArray }  from '../../outils/statistics-outils';
 
-import * as O from '../../outils/outils-management';
+import * as O from '../../outils/management-outils';
 
 @Component({
     selector: 'app-byobjectid-notation',

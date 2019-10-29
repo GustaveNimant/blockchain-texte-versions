@@ -4,7 +4,7 @@ import { NotationModel } from '../models/notation.model';
 import { Subject }       from 'rxjs';
 import { BehaviorSubject } from 'rxjs';
 
-import * as O from '../outils/outils-management';
+import * as O from '../outils/management-outils';
 
 @Injectable({
     providedIn: 'root'

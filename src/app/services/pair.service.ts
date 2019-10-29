@@ -4,7 +4,7 @@ import { PairModel } from '../models/pair.model';
 import { Subject } from 'rxjs';
 import { BehaviorSubject } from 'rxjs';
 
-import * as O from '../outils/outils-management';
+import * as O from '../outils/management-outils';
 import * as process from 'process';
 
 @Injectable({

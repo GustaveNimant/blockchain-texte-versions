@@ -6,7 +6,7 @@ import { ProfilModel }                from '../../models/profil.model';
 import { ProfilService }              from '../../services/profil.service';
 import { StateService }               from '../../services/state.service';
 
-import * as O from '../../outils/outils-management';
+import * as O from '../../outils/management-outils';
 
 @Component({
     selector: 'app-new-profil',

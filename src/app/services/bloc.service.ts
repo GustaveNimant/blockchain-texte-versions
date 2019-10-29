@@ -4,7 +4,7 @@ import { BlocModel } from '../models/bloc.model';
 import { Subject } from 'rxjs';
 import { BehaviorSubject } from 'rxjs';
 
-import * as M from '../outils/outils-management';
+import * as M from '../outils/management-outils';
 import * as process from 'process';
 
 @Injectable({

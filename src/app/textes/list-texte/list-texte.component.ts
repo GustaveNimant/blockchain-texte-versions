@@ -10,9 +10,9 @@ import { NotationModel } from '../../models/notation.model';
 
 import { Subscription } from 'rxjs';
 import { filter, map, scan, take, tap, toArray } from 'rxjs/operators';
-import { arrayCountSumAverageRms, sumOfArray, averageOfArray, varianceOfArray, rmsOfArray }  from '../../outils/outils-statistics';
+import { arrayCountSumAverageRms, sumOfArray, averageOfArray, varianceOfArray, rmsOfArray }  from '../../outils/statistics-outils';
 
-import * as O from '../../outils/outils-management';
+import * as O from '../../outils/management-outils';
 
 @Component({
     selector: 'app-list-texte',

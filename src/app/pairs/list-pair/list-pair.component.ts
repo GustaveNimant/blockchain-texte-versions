@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
 
 import { Subscription } from 'rxjs';
 
-import * as O from '../../outils/outils-management';
+import * as O from '../../outils/management-outils';
 
 @Component({
     selector: 'app-list-pair',

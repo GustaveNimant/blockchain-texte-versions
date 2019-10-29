@@ -5,7 +5,7 @@ import { ProfilService }       from '../services/profil.service';
 import { Router }             from '@angular/router';
 import { ProfilModel } from '../models/profil.model';
 
-import * as O from '../outils/outils-management';
+import * as O from '../outils/management-outils';
 
 @Component({
     selector: 'app-header',
