@@ -41,6 +41,7 @@ const routes: Routes = [
       children: [
 	  { path: 'blockchain', component: BlockchainComponent},
 	  { path: 'new-bloc', component: NewBlocComponent},
+	  { path: 'new-bloc/:id', component: NewBlocComponent},
 	  { path: 'list-bloc', component: ListBlocComponent},
 	  { path: 'single-bloc/:id', component: SingleBlocComponent},
 	  { path: '', pathMatch: 'full', redirectTo: 'list-bloc' },

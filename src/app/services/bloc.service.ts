@@ -32,7 +32,7 @@ export class BlocService {
 	console.log('%cEntrée dans Promise','color:#0000aa',here,'avec bloc', bloc);
 
 	return new Promise((resolve, reject) => {
-	    this.http.post(this.uri_all, bloc)
+	    this.http.post(this.uri_all + 'saveBloc', bloc)
 		.subscribe( /* POST => createBlocCtrl par uri_all */
 			    (response) => {
 				resolve(response);

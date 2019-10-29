@@ -1,9 +1,9 @@
-import { Router }                             from '@angular/router';
+import { ActivatedRoute, Router }             from '@angular/router';
+import { BlocModel }        from '../../models/bloc.model';
+import { BlocService }      from '../../services/bloc.service';
 import { Component, OnDestroy, OnInit }       from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ProfilModel }        from '../../models/profil.model';
-import { BlocModel }        from '../../models/bloc.model';
-import { BlocService }      from '../../services/bloc.service';
 import { ProfilService }     from '../../services/profil.service';
 import { StateService }      from '../../services/state.service';
 
@@ -19,11 +19,14 @@ import * as O from '../../outils/outils-management';
 
 export class NewBlocComponent implements OnInit, OnDestroy {
 
-    public blocForm: FormGroup;
     public loading = false;
+
     public errorMessage: string;
     public debug: boolean;
-    
+
+    public blocForm: FormGroup;
+    private blocPrecedent: BlocModel;
+
     private currentEmailSub: Subscription;
     private currentEmail: string;
 
@@ -33,12 +36,13 @@ export class NewBlocComponent implements OnInit, OnDestroy {
     private currentProfil = new ProfilModel();
     
     constructor(
-	private formBuilder: FormBuilder,
-	private stateService: StateService,
 	private blocService: BlocService,
+	private formBuilder: FormBuilder,
 	private profilService: ProfilService,
-    	private router: Router)
-	{
+	private route: ActivatedRoute,
+	private stateService: StateService,
+    	private router: Router,
+    )	{
 	    let here = O.functionName ();
 	    console.log('%cEntrée dans','color:#00aa00', here);
 	}
@@ -54,22 +58,39 @@ export class NewBlocComponent implements OnInit, OnDestroy {
 
 	this.profilService.getProfilByEmail (this.currentEmail)
 	    .then(
-		(com: ProfilModel) => {
-		    console.log('Dans ngOnInit getProfilByEmail com', com);
-		    this.currentProfil = com;
+		(pro: ProfilModel) => {
+		    console.log('Dans',here,'getProfilByEmail currentProfil', pro);
+		    this.currentProfil = pro;
 		},
 	    ).catch (
 		(error) => {
-		    console.log('Dans ngOnInit getProfilByEmail Erreur', error);
+		    console.log('Dans',here,'getProfilByEmail Erreur', error);
 		}
 	    );
 
-	/* initialisation */
+	this.loading = true;
 	this.blocForm = this.formBuilder.group({
 	    contenu: [null],
 	    auteurClePublique: ['uneCléPublique'] 
 	});
 	
+	this.route.params.subscribe(
+	    (par) => {
+		console.log('Dans ngOnInit par',par);
+		
+		/* Improve calculer la noteMoyenne pour cet id avec list-notation */
+
+		this.blocService.getBlocByObjectId(par.id).then(
+		    (blo: BlocModel) => {
+			console.log('Dans',here,'blo',blo);
+			this.blocPrecedent = blo;
+			this.blocForm.get('contenu').setValue(this.blocPrecedent.contenu);
+			this.loading = false;
+		    }
+		);
+	    }
+	);
+
     }
 
     onSubmit() {
@@ -78,8 +99,9 @@ export class NewBlocComponent implements OnInit, OnDestroy {
 	this.loading = true;
 
 	/* copie le contenu du blocForm */
-	const bloc = new BlocModel();
-
+	var bloc = new BlocModel();
+	bloc = this.blocPrecedent;
+	
 	bloc.contenu = this.blocForm.get('contenu').value;
 	bloc.auteurClePublique = this.blocForm.get('auteurClePublique').value;
 	bloc._id = new Date().getTime().toString();

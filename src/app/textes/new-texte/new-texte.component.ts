@@ -50,17 +50,17 @@ export class NewTexteComponent implements OnInit, OnDestroy {
 	this.stateService.mode$.next('form');
 
 	this.debug = this.stateService.debug;
-    	console.log('Dans ngOnInit debug', this.debug);
+    	console.log('Dans',here,'debug', this.debug);
 
 	this.profilService.getProfilByEmail (this.currentEmail)
 	    .then(
 		(com: ProfilModel) => {
-		    console.log('Dans ngOnInit getProfilByEmail com', com);
+		    console.log('Dans',here,'getProfilByEmail com', com);
 		    this.currentProfil = com;
 		},
 	    ).catch (
 		(error) => {
-		    console.log('Dans ngOnInit getProfilByEmail Erreur', error);
+		    console.log('Dans',here,'getProfilByEmail Erreur', error);
 		}
 	    );
 

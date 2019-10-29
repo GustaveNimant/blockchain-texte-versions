@@ -120,23 +120,17 @@ export class SingleBlocComponent implements OnInit, OnDestroy {
 	this.router.navigate(['/notations/sum-notation/' + this.currentBloc._id]);
     }
 
-    onDisplayNotation() {
+    onCreateNewBloc() {
 	let here = O.functionName ();
 	console.log('%cEntrée dans','color:#00aa00', here);
-	console.log('Dans',here,'navigation vers /notations/byobjectid-notation/'+this.currentBloc._id);
 
-	this.router.navigate(['/notations/byobjectid-notation/' + this.currentBloc._id]);
-    }
-    
-    onModifyBloc() {
-	this.router.navigate(['/blocs/modify-bloc/' + this.currentBloc._id]);
+	this.router.navigate(['/blocs/new-bloc/' + this.currentBloc._id]);
     }
 
-    onNewBlocVersion() {
-	this.router.navigate(['/blocs/new-bloc-version/' + this.currentBloc._id]);
-    }
+    onDeleteBloc() {
+	let here = O.functionName ();
+	console.log('%cEntrée dans','color:#00aa00', here);
 
-    onDelete() {
 	this.loading = true;
 	this.blocService.deleteBloc(this.currentBloc._id).then(
 	    () => {
@@ -146,6 +140,21 @@ export class SingleBlocComponent implements OnInit, OnDestroy {
 	);
     }
     
+    onDisplayNotation() {
+	let here = O.functionName ();
+	console.log('%cEntrée dans','color:#00aa00', here);
+	console.log('Dans',here,'navigation vers /notations/byobjectid-notation/'+this.currentBloc._id);
+
+	this.router.navigate(['/notations/byobjectid-notation/' + this.currentBloc._id]);
+    }
+    
+    onModifyBloc() {
+	let here = O.functionName ();
+	console.log('%cEntrée dans','color:#00aa00', here);
+
+	this.router.navigate(['/blocs/modify-bloc/' + this.currentBloc._id]);
+    }
+
     ngOnDestroy() {
 	let here = O.functionName ();
 	console.log('%cEntrée dans','color:#00aa00', here);
