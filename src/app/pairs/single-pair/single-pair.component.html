@@ -1,1 +1,30 @@
-<p>single-pair works!</p>
+<mat-spinner *ngIf="loading"></mat-spinner>
+<div *ngIf="debug">Debug:Dans single-pair.component.html</div>
+<div *ngIf="!loading">
+
+    <div class="single-pair-pane">
+
+	<div class="single-pair-info">
+	    <button class="btn btn-primary m-1"
+		    (click)="onModifyPair()">Modifier</button>
+	    <br>
+	</div>
+	<button class="btn btn-danger m-1" (click)="onDelete()"
+		       [disabled]="!isAuth">Supprimer</button>
+	<br>
+	<button class="btn btn-link"
+		       (click)="onGoAllPair()"><< Retour à la liste des Pairs</button>
+
+	<p class="alert-danger"
+	   *ngIf="errorMessage">Dans single-pair.component.html.<br>Erreur<br> {{ errorMessage }}</p>
+	
+	<p class="alert-danger" *ngIf="!isAuth"><br>
+	    Il faut <a class="header-link"
+		       routerLink="/login"
+		       routerLinkActive="active">
+	    <button class="btn btn-primary">se connecter</button>
+	    </a> pour modifier un pair
+	</p>
+
+    </div>
+</div>

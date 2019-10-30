@@ -1,5 +1,21 @@
-<app-header></app-header>
-<h2 class="image-legende">
+<app-main-menu></app-main-menu>
+
+<h2>
     Les pairs
+    <ul>
+	<li *ngIf="(!isAuth)">
+	    <a routerLink="/login"
+	       routerLinkActive="active">Login (pour entrer un nouveau pair)</a>
+	</li>
+	<li *ngIf="(isAuth)">
+	    <a routerLink="/pairs/new-pair"
+	       routerLinkActive="active">Entrer un nouveau pair</a>
+	</li>
+	<li>
+	    <a routerLink="/pairs/list-pair"
+	       routerLinkActive="active">Afficher la liste des pairs</a>
+	</li>
+    </ul>
 </h2>
+
 <router-outlet></router-outlet>

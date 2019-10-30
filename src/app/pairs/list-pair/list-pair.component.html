@@ -7,16 +7,18 @@
    *ngIf="pair_a.length <= 0 && !loading">
     La collection <b><i>pair_c</i></b> de la base de données <b><i>blockchain-texte-versions-db</i></b> est vide !</p>
 
-<div class="pair-grid"
-     *ngIf="pair_a.length >= 0">
+<p class="text-center">Les Pairs</p>
+
+    <div class="pair-grid"
+	 *ngIf="pair_a.length >= 0">
 
     <div class="pair-pane"
 	 *ngFor="let un_pair of pair_a"
 	 (click)="onPairClicked(un_pair._id)">
 	<div class="pair-titre">
-	    <h3>
-		Url {{ un_pair.pairUrl }}
-	    </h3>
+	    <h5>
+		Url : {{ un_pair.url }}
+	    </h5>
 	</div>
     </div>
     <p class="alert-danger"

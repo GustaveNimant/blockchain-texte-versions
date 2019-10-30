@@ -1,4 +1,4 @@
 export class PairModel {
-    pairUrl: [string];
+    url: [string];
     _id: string;
 }

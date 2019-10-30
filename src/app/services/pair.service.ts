@@ -32,7 +32,7 @@ export class PairService {
 	console.log('%cEntrée dans Promise','color:#0000aa',here,'avec pair', pair);
 
 	return new Promise((resolve, reject) => {
-	    this.http.post(this.uri_all, pair)
+	    this.http.post(this.uri_all + 'savePair', pair)
 		.subscribe( /* POST => createPairCtrl par uri_all */
 			    (response) => {
 				resolve(response);
@@ -48,22 +48,6 @@ export class PairService {
 	});
     }
     
-    createNewPairVersion(pairObjectId: string, pair: PairModel) { /* pairObjectId  conservé */
-	let here = O.functionName ();
-	console.log('%cEntrée dans Promise','color:#0000aa',here,'avec pairObjectId',pairObjectId);
-
-	return new Promise((resolve, reject) => {
-	    this.http.post(this.uri_all + pairObjectId, pair).subscribe(
-		(response) => {
-		    resolve(response);
-		},
-		(error) => {
-		    reject(error);
-		}
-	    );
-	});
-    }
-
     deletePair(pairObjectId: string) {
 	let here = O.functionName ();
 	console.log('%cEntrée dans Promise','color:#0000aa',here,'avec pairObjectId',pairObjectId);
@@ -102,12 +86,12 @@ export class PairService {
 
 	return new Promise((resolve, reject) => {
 	    this.http.get(this.uri_all + pairObjectId).subscribe(
-		(tex:PairModel) => {
-		    if (tex) {
-			this.currentPair$.next(tex)
-			console.log(here,'emit tex',tex);
+		(pai:PairModel) => {
+		    if (pai) {
+			this.currentPair$.next(pai)
+			console.log(here,'emit pai',pai);
 		    }
-		    resolve(tex);
+		    resolve(pai);
 		},
 		(error) => {
 		    reject(error);
@@ -124,10 +108,10 @@ export class PairService {
 
 	return new Promise((resolve, reject) => {
 	    this.http.get(this.uri_all).subscribe(
-		(tex_a: PairModel[]) => {
-		    if (tex_a) {
-			this.pair_a = tex_a;
-			console.log('Dans',here,'pair_a',tex_a);
+		(pai_a: PairModel[]) => {
+		    if (pai_a) {
+			this.pair_a = pai_a;
+			console.log('Dans',here,'pair_a',pai_a);
 			this.emitPairs(here);
 		    }
 		},
@@ -172,8 +156,8 @@ export class PairService {
 
 	this.getPairByObjectId (pairObjectId)
 	    .then(
-		(tex: PairModel) => {
-		    console.log('Dans',here,'currentPair\$.next tex',tex);
+		(pai: PairModel) => {
+		    console.log('Dans',here,'currentPair\$.next pai',pai);
 		},
 	    ).catch (
 		(error) => {

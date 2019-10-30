@@ -2,8 +2,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const pairSchema = new Schema({
-    pairObjectId: { type: String, required: true },
-    pairUrl: { type: String, required: true },
+    url: { type: String, required: true },
 },{
     collection : 'pair_c'
 });

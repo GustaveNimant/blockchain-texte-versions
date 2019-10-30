@@ -1,1 +1,19 @@
-<p>new-pair works!</p>
+<mat-spinner *ngIf="loading"></mat-spinner>
+<div *ngIf="debug">Debug:Dans new-pair.component.html</div>
+<div *ngIf="!loading" class="col-sm-6 offset-sm-3 mt-2">
+    <form [formGroup]="pairForm">
+	<div class="form-group">
+	    <label for="url">Url du pair</label>
+	    <input type="pair"
+		   placeholder="ws://host:port"
+		   formControlName="url"
+		   class="form-control">
+	</div>
+	<button class="btn btn-primary"
+		       (click)="onSubmit()"
+		       [disabled]="pairForm.invalid">Submit</button>
+	<p class="alert-danger"
+	   *ngIf="errorMessage">Dans new-pair.component.html.<br>Erreur lors de la création du pair:<br> {{ errorMessage }}</p>
+    </form>
+</div>
+

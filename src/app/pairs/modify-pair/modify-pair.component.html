@@ -1,1 +1,28 @@
-<p>modify-pair works!</p>
+<mat-spinner *ngIf="loading"></mat-spinner>
+<div *ngIf="!loading" class="col-sm-6 offset-sm-3 mt-2">
+    <form [formGroup]="pairForm">
+	<div class="form-group">
+	    <label for="url">Description</label>
+	    <textarea name="url"
+                      id="url"
+                      cols="30" rows="7"
+                      class="form-control"
+                      formControlName="url"
+                      placeholder="Modifier l'url"></textarea>
+	</div>
+
+	<button class="btn btn-success" (click)="onModifyPair()"
+		[disabled]="pairForm.invalid">Modifier</button>
+	
+	<p class="alert-danger" *ngIf="errorMessage"><br>
+	    Il faut <a class="header-link"
+		       routerLink="/login"
+		       routerLinkActive="active">
+	    <button class="btn btn-primary">se connecter</button>
+	    </a>
+	    pour modifier un pair
+	</p>
+	
+    </form>
+</div>
+

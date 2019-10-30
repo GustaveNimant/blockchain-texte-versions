@@ -5,11 +5,12 @@ import { MainMenuComponent }     from './main-menu/main-menu.component';
 
 import { BlocsComponent }                from './blocs/blocs.component';
 
-import { ListBlocComponent }             from './blocs/list-bloc/list-bloc.component';
 
+import { BlockchainComponent }           from './blocs/blockchain/blockchain.component';
+import { BroadcastListBlocComponent }    from './blocs/broadcast-list-bloc/broadcast-list-bloc.component';
+import { ListBlocComponent }             from './blocs/list-bloc/list-bloc.component';
 import { NewBlocComponent }              from './blocs/new-bloc/new-bloc.component';
 import { SingleBlocComponent }           from './blocs/single-bloc/single-bloc.component';
-import { BlockchainComponent }           from './blocs/blockchain/blockchain.component';
 
 import { TextesComponent }                from './textes/textes.component';
 import { ListTexteComponent }             from './textes/list-texte/list-texte.component';
@@ -42,6 +43,7 @@ const routes: Routes = [
 	  { path: 'blockchain', component: BlockchainComponent},
 	  { path: 'new-bloc', component: NewBlocComponent},
 	  { path: 'new-bloc/:id', component: NewBlocComponent},
+	  { path: 'broadcast-list-bloc', component: BroadcastListBlocComponent},
 	  { path: 'list-bloc', component: ListBlocComponent},
 	  { path: 'single-bloc/:id', component: SingleBlocComponent},
 	  { path: '', pathMatch: 'full', redirectTo: 'list-bloc' },

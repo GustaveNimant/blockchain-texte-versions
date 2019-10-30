@@ -1,12 +1,23 @@
 const pairMongooseModel = require('../models/pair.mongoose.model');
 const D = require('../outils/debug');
 
-exports.createPairController = (req, res, next) => {
+function createPairController (pair) {
+    var here=O.functionNameJS();
+    if (D.debug) {console.log('Entrée dans pair.controller.js',here,'avec pair',pair)};
+
+    const pairRecu = new pairMongooseModel({
+	url: pair.url,
+    });
+    
+    return pairRecu;
+};
+
+
+exports.savePairController = (req, res, next) => {
     if (D.debug) {console.log('Entrée dans pairController.js.createPairController avec req.body ', req.body)};
 
     const pair = new pairMongooseModel({
-	texteObjectId: req.body.texteObjectId,
-	assertionList: req.body.assertionList,
+	url: req.body.url,
     });
     
     pair.save()
@@ -89,8 +100,7 @@ exports.modifyPairController = (req, res, next) => {
     if (D.debug) {console.log('Entrée dans pairController.js.modifyPairController avec req.params.id ', req.params.id)};
     
     const pair = new pairMongooseModel({
-	texteObjectId: req.body.texteObjectId,
-	assertionList: req.body.assertionList,
+	url: req.body.url,
 	_id: req.params.id, /* to keep the_id */
 	__v: req.body.__v
     });

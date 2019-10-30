@@ -75,4 +75,25 @@ export class ListPairComponent implements OnInit {
 
     }
 
+
+    onPairClicked(id: string) {
+	let here = O.functionName ();
+	console.log('%cEntrée dans','color:#00aa00', here);
+	console.log('Entrée dans',here,'avec id', id);
+
+	console.log('Dans',here,'navigation vers', '/pairs/single-pair/' + id);
+
+	this.router.navigate(['/pairs/single-pair/' + id]);
+    }
+
+    ngOnDestroy() {
+	let here = O.functionName ();
+	console.log('%cEntrée dans','color:#00aa00', here);
+
+	this.pair_aSub.unsubscribe();
+
+	O.unsubscribeLog(here, 'pair_aSub');
+	O.exiting_from_function (here);
+    }
+
 }

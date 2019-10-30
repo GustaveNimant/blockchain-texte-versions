@@ -48,22 +48,6 @@ export class BlocService {
 	});
     }
     
-    createNewBlocVersion(blocObjectId: string, bloc: BlocModel) { /* blocObjectId  conservé */
-	let here = M.functionName ();
-	console.log('%cEntrée dans Promise','color:#0000aa',here,'avec blocObjectId',blocObjectId);
-
-	return new Promise((resolve, reject) => {
-	    this.http.post(this.uri_all + blocObjectId, bloc).subscribe(
-		(response) => {
-		    resolve(response);
-		},
-		(error) => {
-		    reject(error);
-		}
-	    );
-	});
-    }
-
     deleteBloc(blocObjectId: string) {
 	let here = M.functionName ();
 	console.log('%cEntrée dans Promise','color:#0000aa',here,'avec blocObjectId',blocObjectId);
