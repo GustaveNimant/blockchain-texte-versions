@@ -57,17 +57,19 @@ export class ModifyPairComponent implements OnInit {
     }
 
     onModifyPair() { /* modifier seulement le Pair */
-	console.log('Entrée dans onModifyPair');
+	let here = O.functionName ();
+	console.log('%cEntrée dans','color:#00aa00', here);
+
 	this.loading = true;
 
 	const pair = new PairModel();
 
 	pair.url = this.pairForm.get('url').value;
 
-	console.log('Dans onModifyPair pair', pair);
+	console.log('Dans',here,'pair',pair);
 	
 	this.pairService.createNewPair(pair).then(
-		() => {
+	    () => {
 		this.pairForm.reset();
 		this.loading = false;
 		this.router.navigate(['/pairs/list-pair']);

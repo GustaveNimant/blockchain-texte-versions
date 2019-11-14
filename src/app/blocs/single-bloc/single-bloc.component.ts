@@ -99,27 +99,6 @@ export class SingleBlocComponent implements OnInit, OnDestroy {
 	O.exiting_from_function (here);	
     }
 
-    onGoBack() {
-	this.router.navigate([this.currentUrl]);
-    }
-
-    onGoAllBloc() {
-	this.router.navigate(['/blocs/list-bloc']);
-    }
-
-    onNotate() {
-	console.log('Entrée dans onNotate navigation vers /notations/new-notation/'+this.currentBloc._id);
-	this.router.navigate(['/notations/new-notation/' + this.currentBloc._id]);
-    }
-
-    onAverageNote() {
-	let here = O.functionName ();
-	console.log('%cEntrée dans','color:#00aa00', here);
-	console.log('Dans',here,'navigation vers /notations/sum-notation/'+this.currentBloc._id);
-
-	this.router.navigate(['/notations/sum-notation/' + this.currentBloc._id]);
-    }
-
     onCreateNewBloc() {
 	let here = O.functionName ();
 	console.log('%cEntrée dans','color:#00aa00', here);
@@ -148,6 +127,27 @@ export class SingleBlocComponent implements OnInit, OnDestroy {
 	this.router.navigate(['/notations/byobjectid-notation/' + this.currentBloc._id]);
     }
     
+    onGoBack() {
+	this.router.navigate([this.currentUrl]);
+    }
+
+    onGoAllBloc() {
+	this.router.navigate(['/blocs/list-bloc']);
+    }
+
+    onNotate() {
+	console.log('Entrée dans onNotate navigation vers /notations/new-notation/'+this.currentBloc._id);
+	this.router.navigate(['/notations/new-notation/' + this.currentBloc._id]);
+    }
+
+    onAverageNote() {
+	let here = O.functionName ();
+	console.log('%cEntrée dans','color:#00aa00', here);
+	console.log('Dans',here,'navigation vers /notations/sum-notation/'+this.currentBloc._id);
+
+	this.router.navigate(['/notations/sum-notation/' + this.currentBloc._id]);
+    }
+
     onModifyBloc() {
 	let here = O.functionName ();
 	console.log('%cEntrée dans','color:#00aa00', here);

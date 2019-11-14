@@ -9,6 +9,7 @@ import { BlocsComponent }                from './blocs/blocs.component';
 import { BlockchainComponent }           from './blocs/blockchain/blockchain.component';
 import { BroadcastListBlocComponent }    from './blocs/broadcast-list-bloc/broadcast-list-bloc.component';
 import { ListBlocComponent }             from './blocs/list-bloc/list-bloc.component';
+import { ModifyBlocComponent }           from './blocs/modify-bloc/modify-bloc.component';
 import { NewBlocComponent }              from './blocs/new-bloc/new-bloc.component';
 import { SingleBlocComponent }           from './blocs/single-bloc/single-bloc.component';
 
@@ -45,6 +46,7 @@ const routes: Routes = [
 	  { path: 'new-bloc/:id', component: NewBlocComponent},
 	  { path: 'broadcast-list-bloc', component: BroadcastListBlocComponent},
 	  { path: 'list-bloc', component: ListBlocComponent},
+	  { path: 'modify-bloc/:id', component: ModifyBlocComponent},
 	  { path: 'single-bloc/:id', component: SingleBlocComponent},
 	  { path: '', pathMatch: 'full', redirectTo: 'list-bloc' },
 	  { path: '**', redirectTo: 'list-bloc' }

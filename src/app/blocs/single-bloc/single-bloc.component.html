@@ -13,13 +13,20 @@
 	    <button class="btn btn-primary m-1"
 		    (click)="onDisplayNotation()">Afficher les Notations</button>
 	    <br>
+	    <button class="btn btn-primary m-1"
+		    (click)="onModifyBloc()">Modifier le bloc</button>
+	    <br>
 	    <button class="btn btn-success m-1"
 		    (click)="onCreateNewBloc()">Créer un nouveau bloc</button>
+	    <br>
+	    <br>
+	    <button class="btn btn-danger m-1"
+		    (click)="onDeleteBloc()">Supprimer le bloc</button>
 	    <br>
 	</div>
 	
 	<button class="btn btn-link"
-		       (click)="onGoAllBloc()"><< Retour à la liste des Blocs</button>
+		(click)="onGoAllBloc()"><< Retour à la liste des Blocs</button>
 
 	<p class="alert-danger"
 	   *ngIf="errorMessage">Dans single-bloc.component.html.<br>Erreur<br> {{ errorMessage }}</p>

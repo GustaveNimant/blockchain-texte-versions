@@ -45,6 +45,7 @@ import { BlockchainComponent } from './blocs/blockchain/blockchain.component';
 import { BlocsComponent }           from './blocs/blocs.component';
 import { BroadcastListBlocComponent }    from './blocs/broadcast-list-bloc/broadcast-list-bloc.component';
 import { ListBlocComponent }             from './blocs/list-bloc/list-bloc.component';
+import { ModifyBlocComponent }           from './blocs/modify-bloc/modify-bloc.component';
 import { NewBlocComponent }              from './blocs/new-bloc/new-bloc.component';
 import { SingleBlocComponent }           from './blocs/single-bloc/single-bloc.component';
 
@@ -61,6 +62,7 @@ import { SingleBlocComponent }           from './blocs/single-bloc/single-bloc.c
 	ListTexteComponent,
 	LoginComponent,
 	MainMenuComponent,
+	ModifyBlocComponent,
 	ModifyPairComponent,
 	ModifyTexteComponent,
 	NewBlocComponent,

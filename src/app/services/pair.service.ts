@@ -48,6 +48,27 @@ export class PairService {
 	});
     }
     
+    connectPair(pairObjectId: string) { 
+	let here = O.functionName();
+	console.log('%cEntrée dans Promise','color:#0000aa',here,'avec pairObjectId',pairObjectId);
+	console.log('Dans',here,'uri_all',this.uri_all);
+
+	return new Promise((resolve, reject) => {
+	    this.http.get(this.uri_all + 'connectPair/' + pairObjectId).subscribe(
+		(pai:PairModel) => {
+		    if (pai) {
+			this.currentPair$.next(pai)
+			console.log('Dans',here,'pai',pai);
+		    }
+		    resolve(pai);
+		},
+		(error) => {
+		    reject(error);
+		}
+	    );
+	});
+    }
+
     deletePair(pairObjectId: string) {
 	let here = O.functionName ();
 	console.log('%cEntrée dans Promise','color:#0000aa',here,'avec pairObjectId',pairObjectId);

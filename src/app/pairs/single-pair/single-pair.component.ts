@@ -56,14 +56,14 @@ export class SinglePairComponent implements OnInit, OnDestroy {
 	this.stateService.mode$.next('single-pair');
 	
 	this.activatedRoute.params.subscribe(
-	    (params: Params) => {
-		console.log('Dans',here,' params', params);
-		this.pairService.getPairByObjectId(params.id)
+	    (par: Params) => {
+		console.log('Dans',here,' par', par);
+		this.pairService.getPairByObjectId(par.id)
 		    .then(
-			(tex: PairModel) => {
+			(pai: PairModel) => {
 			    this.loading = false;
-			    this.currentPair = tex;
-			    console.log('Dans',here,'getPairByObjectId tex',tex);
+			    this.currentPair = pai;
+			    console.log('Dans',here,'getPairByObjectId pai',pai);
 			}
 		    ).catch(
 			(error) => {
@@ -83,9 +83,9 @@ export class SinglePairComponent implements OnInit, OnDestroy {
 	);
 	
 	this.currentPairSub = this.pairService.currentPair$.subscribe(
-	    (tex) => {
-		console.log('Dans',here,'subscribe tex',tex);
-		this.currentPair = tex;
+	    (pai) => {
+		console.log('Dans',here,'subscribe pai',pai);
+		this.currentPair = pai;
 		this.loading = false;
 	    }
 	);
@@ -96,9 +96,31 @@ export class SinglePairComponent implements OnInit, OnDestroy {
 		console.log('Dans',here,' isAuth', this.isAuth);
 	    }
 	);
+
 	M.exiting_from_function (here);	
     }
 
+    onConnectPair() {
+	this.loading = true;
+
+	this.pairService.connectPair(this.currentPair._id).then(
+	    () => {
+		this.loading = false;
+		this.router.navigate(['/pairs/list-pair']);
+	    }
+	);
+    }
+
+    onDeletePair() {
+	this.loading = true;
+	this.pairService.deletePair(this.currentPair._id).then(
+	    () => {
+		this.loading = false;
+		this.router.navigate(['/pairs/list-pair']);
+	    }
+	);
+    }
+    
     onGoBack() {
 	this.router.navigate([this.currentUrl]);
     }
@@ -111,16 +133,6 @@ export class SinglePairComponent implements OnInit, OnDestroy {
 	this.router.navigate(['/pairs/modify-pair/' + this.currentPair._id]);
     }
 
-    onDelete() {
-	this.loading = true;
-	this.pairService.deletePair(this.currentPair._id).then(
-	    () => {
-		this.loading = false;
-		this.router.navigate(['/pairs/list-pair']);
-	    }
-	);
-    }
-    
     ngOnDestroy() {
 	let here = M.functionName ();
 	console.log('%cEntrée dans','color:#00aa00', here);

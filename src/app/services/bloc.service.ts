@@ -54,17 +54,18 @@ export class BlocService {
 	console.log('Dans',here,'uri_all',this.uri_all);
 	
 	return new Promise((resolve, reject) => {
-	    this.http.delete(this.uri_all + blocObjectId).subscribe(
-		(response) => {
-		    resolve(response);
-		},
-		(error) => {
-		    reject(error);
-		}
-	    );
+	    this.http.delete(this.uri_all + blocObjectId).
+		 subscribe(
+		     (response) => {
+			 resolve(response);
+		     },
+		     (error) => {
+			 reject(error);
+		     }
+		 );
 	});
     }
-
+    
     emitCurrentBloc(caller) {
 	let here = M.functionName ();
 	console.log('%cEntrée dans','color:#00aa00',here,'avec currentBloc',this.currentBloc);

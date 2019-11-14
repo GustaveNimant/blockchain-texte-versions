@@ -43,11 +43,6 @@ export class ListBlocComponent implements OnInit, OnDestroy {
     private pseudo_a = new Array<string>();
     private currentPseudo: string;
 
-    private participantCount: number;
-    private sum: number;
-    private average: number;
-    private rms: number;
-
     private notation_aSub:Subscription;
     private notation_a = new Array<NotationModel>();
     private currentNotation_a = new Array<NotationModel>();

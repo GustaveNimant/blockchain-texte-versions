@@ -44,7 +44,7 @@ export function createSha (str:string, typeSha:string, formatInput: string, form
     }
 
     const shaObj = new jsSHA(typeSha, formatInput);
-	shaObj.update(str);
+    shaObj.update(str);
     const hash = shaObj.getHash(formatOutput);
 
     return hash;

@@ -1,5 +1,6 @@
 'use strict';
 
+const A = require("./outils/arrays");
 const B = require('./outils/blockchain');
 const D = require('./outils/debug');
 const O = require('./outils/outils');
@@ -28,9 +29,10 @@ http_server.listen(http_port);
 
 // P2P
 var ModuleName = 'p2p_server.js';
+var here = ModuleName;
 
 const p2p_port = O.normalizePort (process.env.P2P_PORT || '6000');
 
 const p2p_server = WS.initP2PServer(p2p_port, ModuleName);
 
-B.getGenesisBlock();
+A.blockChain = [B.getGenesisBlock(here)];

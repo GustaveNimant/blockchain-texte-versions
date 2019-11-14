@@ -37,8 +37,6 @@ export class ListPairComponent implements OnInit {
 	let here = O.functionName ();
 	console.log('%cEntrée dans','color:#00aa00', here);
 
-	console.log('\nDEBUG------- avant this.pairService.pair_a$.subscribe ---------\n');
-
 	this.pair_aSub = this.pairService.pair_a$
 			     .subscribe(
 				 (pai_a) => {
@@ -53,15 +51,12 @@ export class ListPairComponent implements OnInit {
 				 }
 			     );
 	
-	console.log('\nDEBUG------- après this.pairService.pair_a$.subscribe ---------\n');
-	console.log('\nDEBUG------- avant this.pairService.getPairs  ---------\n');	this.loading = false;
 	
 	this.pairService.getPairs(here) /* afficher les pairs */
 	    .then(
 		() => {
 		    this.loading = false;
 		    console.log('Dans',here,'getPairs then');
-		    this.loading = false;
 		}
 	    ).catch(
 		(error) => {
@@ -70,11 +65,7 @@ export class ListPairComponent implements OnInit {
 		}
 	    );
 
-	console.log('\nDEBUG------- après this.pairService.getPairs  ---------\n');
-
-
     }
-
 
     onPairClicked(id: string) {
 	let here = O.functionName ();
