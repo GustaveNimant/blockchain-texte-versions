@@ -5,6 +5,7 @@ const blocController = require('../controllers/bloc.controller');
 
 router.get('/', blocController.getAllBlocController);
 router.post('/', blocController.getAllBlocController);
+router.post('/broadcast',  blocController.broadcastAllBlocController);
 router.post('/saveBloc',  blocController.saveBlocController);
 router.post('/mineBloc',  blocController.mineBlocController);
 router.get('/:id',   blocController.getOneBlocController);

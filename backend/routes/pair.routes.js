@@ -7,6 +7,7 @@ const multer = require('../middleware/multer-config')
 const pairController = require('../controllers/pair.controller');
 
 router.get('/', pairController.getAllPairController);
+router.get('/connectPair/:id', pairController.connectPairController);
 router.post('/savePair', pairController.savePairController);
 router.get('/:id', pairController.getOnePairController);
 router.put('/:id', auth, multer, pairController.modifyPairController);  /* put  route modified */

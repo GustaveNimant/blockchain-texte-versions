@@ -1,12 +1,57 @@
+const pairMongooseModel = require('../models/pair.mongoose.model');
 const blocMongooseModel = require('../models/bloc.mongoose.model');
 const blockchainMongooseModel = require('../models/blockchain.mongoose.model');
+const WebSocket = require('ws');
 
 const D = require('../outils/debug');
 const O = require('../outils/outils');
 
+const ModuleName = 'bloc.controller.js';
+
+function broadcastAllBlocController (req, res, next) {
+    var here = O.functionNameJS(ModuleName);
+    if (D.debug) {console.log('Entrée dans bloc.controller.js',here,'avec req.body ', req.body)};
+
+    var bloc_a = [];
+
+    blocMongooseModel.find()
+	.then(
+	    (blo_a) => {
+		bloc_a = blo_a;
+		if (D.debug) {console.log('Dans bloc.controller.js',here,'blo_a',blo_a)};
+		res.status(200).json(blo_a);
+	    }
+	).catch(
+	    (error) => {
+		res.status(400).json({
+		    error: error
+		});
+	    }
+	);
+
+    pairMongooseModel.find()
+	.then(
+	    (pair_a) => {
+		pair_a.forEach(pair =>
+			       {socket = new WebSocket(pair.url);
+				message = JSON.stringify(bloc_a);
+				console.log('message',message);
+//				socket.send(message);
+			       });
+		res.status(200).json(pair_a);
+	    }
+	).catch(
+	    (error) => {
+		res.status(400).json({
+		    error: error
+		});
+	    }
+	);
+};
+
 function createBlocController (bloc) {
-    var here=O.functionNameJS();
-    if (D.debug) {console.log('Entrée dans bloc.controller.js',here,'avec bloc',bloc)};
+    var here = O.functionNameJS(ModuleName);
+    if (D.debug) {console.log('Entrée dans',here,'avec bloc',bloc)};
 
     const blocRecu = new blocMongooseModel({
 	index: bloc.index,
@@ -22,11 +67,11 @@ function createBlocController (bloc) {
 };
 
 function deleteBlocController (req, res, next) {
-    var here=O.functionNameJS();
+    var here = O.functionNameJS(ModuleName);
     if (D.debug) {console.log('entrée dans bloc.controller.js',here,'avec req.body ', req.body)};
     if (D.debug) {console.log('entrée dans bloc.controller.js',here,'avec req.params.id ', req.params.id)};
-    
-    blocMongooseModel.deleteone({_id: req.params.id})
+
+    blocMongooseModel.deleteOne({_id: req.params.id})
 	.then(
 	    () => {
 		res.status(200).json({
@@ -43,7 +88,7 @@ function deleteBlocController (req, res, next) {
 };
 
 function getAllBlocController (req, res, next) {
-    var here=O.functionNameJS();
+    var here = O.functionNameJS(ModuleName);
     if (D.debug) {console.log('Entrée dans bloc.controller.js',here,'avec req.body ', req.body)};
 
         blocMongooseModel.find()
@@ -62,7 +107,7 @@ function getAllBlocController (req, res, next) {
 };
 
 function getOneBlocController (req, res, next) {
-    var here=O.functionNameJS();
+    var here = O.functionNameJS(ModuleName);
     if (D.debug) {console.log('entrée dans bloc.controller.js',here,'avec req.body ', req.body)};
     
     blocMongooseModel.findOne({
@@ -83,7 +128,7 @@ function getOneBlocController (req, res, next) {
 };
 
 function mineBlocController (req, res, next) {
-    var here=O.functionNameJS();
+    var here = O.functionNameJS(ModuleName);
     if (D.debug) {console.log('entrée dans bloc.controller.js',here,'avec req.body ', req.body)};
 
     const blocRecu = createBlocController (req.body);
@@ -109,9 +154,9 @@ function mineBlocController (req, res, next) {
 };
 
 function modifyBlocController (req, res, next) {
-    var here=O.functionNameJS();
-    if (D.debug) {console.log('Entrée dans bloc.controller.js',here,'avec req.body ', req.body)};
-    if (D.debug) {console.log('Entrée dans bloc.controller.js',here,'avec req.params.id ', req.params.id)};
+    var here = O.functionNameJS(ModuleName);
+    if (D.debug) {console.log('Entrée dans',here,'avec req.body ', req.body)};
+    if (D.debug) {console.log('Entrée dans',here,'avec req.params.id ', req.params.id)};
     
     const bloc = createBlocController(req.body);
 
@@ -134,7 +179,7 @@ function modifyBlocController (req, res, next) {
 };
 
 function saveBlocController (req, res, next) {
-    var here=O.functionNameJS();
+    var here = O.functionNameJS(ModuleName);
     if (D.debug) {console.log('entrée dans bloc.controller.js',here,'avec req.body ', req.body)};
 
     const bloc = createBlocController(req.body);
@@ -155,12 +200,14 @@ function saveBlocController (req, res, next) {
 	);
 };
 
-module.exports.saveBlocController = saveBlocController;
+module.exports.broadcastAllBlocController = broadcastAllBlocController;
 module.exports.deleteBlocController = deleteBlocController;
 module.exports.getAllBlocController = getAllBlocController;
 module.exports.getOneBlocController = getOneBlocController;
 module.exports.mineBlocController = mineBlocController;
 module.exports.modifyBlocController = modifyBlocController;
+module.exports.saveBlocController = saveBlocController;
+module.exports.createBlocController = createBlocController;
 
 
 

@@ -1,0 +1,16 @@
+
+> production-texte-unique@0.0.0 start /home/achadde/Angular/blockchain-texte-versions
+> ng serve
+
+[34mℹ[39m [90m｢wds｣[39m: Project is running at http://localhost:4200/webpack-dev-server/
+[34mℹ[39m [90m｢wds｣[39m: webpack output is served from /
+[34mℹ[39m [90m｢wds｣[39m: 404s will fallback to //index.html
+
+chunk {main} main.js, main.js.map (main) 350 kB [initial] [rendered]
+chunk {polyfills} polyfills.js, polyfills.js.map (polyfills) 278 kB [initial] [rendered]
+chunk {runtime} runtime.js, runtime.js.map (runtime) 6.09 kB [entry] [rendered]
+chunk {styles} styles.js, styles.js.map (styles) 1.31 MB [initial] [rendered]
+chunk {vendor} vendor.js, vendor.js.map (vendor) 6.96 MB [initial] [rendered]
+Date: 2019-11-08T09:15:55.502Z - Hash: fea004d553d8f8b47dab - Time: 9255ms
+** Angular Live Development Server is listening on localhost:4200, open your browser on http://localhost:4200/ **
+[34mℹ[39m [90m｢wdm｣[39m: Compiled successfully.

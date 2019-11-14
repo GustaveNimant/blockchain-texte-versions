@@ -5,7 +5,7 @@ const D = require('../outils/debug');
 const O = require('../outils/outils');
 
 function createBlocController (bloc) {
-    var here=O.functionNameJS();
+    var here = O.functionNameJS(ModuleName);
     if (D.debug) {console.log('Entrée dans blockchainController.js',here,'avec bloc',bloc)};
 
     const blocRecu = new blocMongooseModel({
@@ -22,7 +22,7 @@ function createBlocController (bloc) {
 };
 
 function getBlockchainController (req, res, next) {
-    var here=O.functionNameJS();
+    var here = O.functionNameJS(ModuleName);
     if (D.debug) {console.log('Entrée dans blockchainController.js',here,'avec req.body ', req.body)};
 
     blockchainMongooseModel.find()
@@ -41,7 +41,7 @@ function getBlockchainController (req, res, next) {
 };
 
 function submitBlockchainController (req, res, next) {
-    var here=O.functionNameJS();
+    var here = O.functionNameJS(ModuleName);
     if (D.debug) {console.log('Entrée dans blockchainController.js',here,'avec req.body ', req.body)};
 
     var blocRecus = [];

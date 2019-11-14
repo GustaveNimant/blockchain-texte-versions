@@ -1,8 +1,56 @@
+'use strict';
+
 const pairMongooseModel = require('../models/pair.mongoose.model');
+
+const A = require('../outils/arrays.js');
 const D = require('../outils/debug');
+const O = require('../outils/outils');
+const WS = require('../outils/websocket');
+
+const ModuleName = 'pair.controller.js';
+
+var connectAllPairController = (req, res, next) => {
+    var here = O.functionNameJS(ModuleName);
+    if (D.debug) {console.log('Entrée dans',here,'avec req.body', req.body)};
+
+    pairMongooseModel.find()
+	.then(
+	    (pai_a) => {
+		if (D.debug) {console.log('Dans',here,'pai_a', pai_a)};
+		WS.connectToPeers (pai_a, here)
+	    }
+	).catch(
+	    (error) => {
+		res.status(400).json({
+		    error: error
+		});
+	    }
+	);
+};
+
+function connectPairController (req, res, next) {
+    var here = O.functionNameJS(ModuleName);
+    if (D.debug) {console.log('Entrée dans',here,'avec req.params.id', req.params.id)};
+    
+    pairMongooseModel.findOne({
+	_id: req.params.id
+    })
+	.then(
+	    (pai) => {
+		if (D.debug) {console.log('Dans',here,'pai', pai)};
+		WS.connectToPeerUrl (pai.url, here);
+	    }
+	).catch(
+	    (error) => {
+		res.status(404).json({
+		    error: error
+		});
+	    }
+	);
+};
 
 function createPairController (pair) {
-    var here=O.functionNameJS();
+    var here = O.functionNameJS(ModuleName);
     if (D.debug) {console.log('Entrée dans pair.controller.js',here,'avec pair',pair)};
 
     const pairRecu = new pairMongooseModel({
@@ -12,34 +60,10 @@ function createPairController (pair) {
     return pairRecu;
 };
 
-
-exports.savePairController = (req, res, next) => {
-    if (D.debug) {console.log('Entrée dans pairController.js.createPairController avec req.body ', req.body)};
-
-    const pair = new pairMongooseModel({
-	url: req.body.url,
-    });
-    
-    pair.save()
-	.then(
-	    () => {
-		res.status(201).json({
-		    message: 'Post sauvé !'
-		});
-	    }
-	).catch(
-	    (error) => {
-		if (D.debug) {console.log('Dans pairController.js.createPairController Erreur ', error)};
-		res.status(400).json({
-		    error: error
-		});
-	    }
-	);
-};
-
 exports.deletePairController = (req, res, next) => {
-    if (D.debug) {console.log('Entrée dans pairController.js.deletePairController avec req.body ', req.body)};
-    if (D.debug) {console.log('Entrée dans pairController.js.deletePairController avec req.params.id ', req.params.id)};
+    var here = O.functionNameJS(ModuleName);
+    if (D.debug) {console.log('Entrée dans',here,'avec req.body', req.body)};
+    if (D.debug) {console.log('Entrée dans',here,'avec req.params.id', req.params.id)};
     
     pairMongooseModel.deleteOne({_id: req.params.id})
 	.then(
@@ -57,34 +81,15 @@ exports.deletePairController = (req, res, next) => {
 	);
 };
 
-
-exports.getOnePairController = (req, res, next) => {
-    if (D.debug) {console.log('Entrée dans pairController.js.getOnePairController avec req.params.id ', req.params.id)};
-    
-    pairMongooseModel.findOne({
-	_id: req.params.id
-    })
-	.then(
-	    (tex) => {
-		if (D.debug) {console.log('Dans pairController.js.getOnePairController tex', tex)};
-		res.status(200).json(tex);
-	    }
-	).catch(
-	    (error) => {
-		res.status(404).json({
-		    error: error
-		});
-	    }
-	);
-};
-
-exports.getAllPairController = (req, res, next) => {
-    if (D.debug) {console.log('Entrée dans pairController.js.getAllPairController avec req.body ', req.body)};
+var getAllPairController = (req, res, next) => {
+    var here = O.functionNameJS(ModuleName);
+    if (D.debug) {console.log('Entrée dans',here,'avec req.body', req.body)};
 
     pairMongooseModel.find()
 	.then(
-	    (des_pairs) => {
-		res.status(200).json(des_pairs);
+	    (pai_a) => {
+		if (D.debug) {console.log('Dans',here,'pai_a', pai_a)};
+		res.status(200).json(pai_a);
 	    }
 	).catch(
 	    (error) => {
@@ -95,9 +100,31 @@ exports.getAllPairController = (req, res, next) => {
 	);
 };
 
+function getOnePairController (req, res, next) {
+    var here = O.functionNameJS(ModuleName);
+    if (D.debug) {console.log('Entrée dans',here,'avec req.params.id', req.params.id)};
+    
+    pairMongooseModel.findOne({
+	_id: req.params.id
+    })
+	.then(
+	    (pai) => {
+		if (D.debug) {console.log('Dans',here,'pai', pai)};
+		res.status(200).json(pai);
+	    }
+	).catch(
+	    (error) => {
+		res.status(404).json({
+		    error: error
+		});
+	    }
+	);
+};
+
 exports.modifyPairController = (req, res, next) => {
-    if (D.debug) {console.log('Entrée dans pairController.js.modifyPairController avec req.body ', req.body)};
-    if (D.debug) {console.log('Entrée dans pairController.js.modifyPairController avec req.params.id ', req.params.id)};
+    var here = O.functionNameJS(ModuleName);
+    if (D.debug) {console.log('Entrée dans',here,'avec req.body', req.body)};
+    if (D.debug) {console.log('Entrée dans',here,'avec req.params.id', req.params.id)};
     
     const pair = new pairMongooseModel({
 	url: req.body.url,
@@ -123,6 +150,33 @@ exports.modifyPairController = (req, res, next) => {
 	);
 };
 
+exports.savePairController = (req, res, next) => {
+    var here = O.functionNameJS(ModuleName);
+    if (D.debug) {console.log('Entre dans',here,'avec req.body', req.body)};
 
+    const pair = new pairMongooseModel({
+	url: req.body.url,
+    });
+    
+    pair.save()
+	.then(
+	    () => {
+		res.status(201).json({
+		    message: 'Post sauvé !'
+		});
+	    }
+	).catch(
+	    
+	    (error) => {
+		if (D.debug) {console.log('Dans pairController.js.createPairController Erreur', error)};
+		res.status(400).json({
+		    error: error
+		});
+	    }
+	);
+};
 
-
+module.exports.connectPairController = connectPairController;
+module.exports.getAllPairController = getAllPairController;
+module.exports.getOnePairController = getOnePairController;
+module.exports.connectAllPairController = connectAllPairController;

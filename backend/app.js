@@ -32,7 +32,8 @@ app.use('/api/textes', texteRoutes);
 
 mongoose.connect(dbConfig.DB_URI, {
     useCreateIndex: true,
-    useNewUrlParser: true
+    useNewUrlParser: true,
+    useUnifiedTopology: true 
 }) /* asked when launching nodemon */
     .then( /* Promise */
 	() => {console.log('Dans app.js.mongoose.connect La base de données est connectée à', dbConfig.DB_URI)}
