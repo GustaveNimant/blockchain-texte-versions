@@ -8,7 +8,7 @@ var BlocController = require('../controllers/bloc.controller');
 var A = require("./arrays");
 var O = require("./outils");
 
-var ModuleName = "blockchain.js";
+var ModuleName = 'blockchain.js';
 
 var MessageType = {
     QUERY_LATEST: 0,
@@ -96,9 +96,10 @@ var getGenesisBlock = (caller) => {
 
 var getLatestBlock = () => O.getLatestElement(A.blockChain);
 
-var isValidChain = (blockchainToValidate) => {
+var isValidChain = (blockchainToValidate, caller) => {
     var here = O.functionNameJS(ModuleName);
     console.log('\n');
+    console.log('Entrée dans',here,'appelé par',caller);
     console.log('Entrée dans',here,'avec blockchainToValidate',blockchainToValidate);
     var genesisBlockToValidate = blockchainToValidate[0];
     var genesisBlockCurrent = getGenesisBlock(here);
@@ -174,22 +175,22 @@ var replaceChain = (newBlocks, caller) => {
     console.log('\n');
     console.log('Entrée dans',here,'appelé par',caller);
     console.log('Entrée dans',here,'avec newBlocks',newBlocks);
-    var areValidNewBlocks = isValidChain(newBlocks);
+    var areValidNewBlocks = isValidChain(newBlocks, here);
 
     console.log('dans',here,'areValidNewBlocks',areValidNewBlocks);
     console.log('dans',here,'newBlocks.length',newBlocks.length);
     console.log('dans',here,'blockChain.length',A.blockChain.length);
     
-    if (isValidChain(newBlocks) && newBlocks.length > A.blockChain.length) {
+    if (isValidChain(newBlocks, here) && newBlocks.length > A.blockChain.length) {
         console.log('dans',here,'La blockchain reçue est valide.');
         console.log('dans',here,'Remplacer la blockchain actuelle par la blockchain reçue.');
         A.blockChain = newBlocks;
-        broadcast(responseLatestMsg(), here);
-    } else if (isValidChain(newBlocks) && ( (newBlocks.length == 1) && (newBlocks.length == A.blockChain.length) )) {
+        broadcast(responseLatestMsg(here), here);
+    } else if (isValidChain(newBlocks, here) && ( (newBlocks.length == 1) && (newBlocks.length == A.blockChain.length) )) {
         console.log('dans',here,'La blockchain reçue est valide.');
         console.log('dans',here,'Remplacer la blockchain actuelle par la blockchain reçue.');
         A.blockChain = newBlocks;
-        broadcast(responseLatestMsg(), here);
+        broadcast(responseLatestMsg(here), here);
     } else {
 	console.log('\n');
         console.log('!!!!! dans',here,'La blockchain reçue est invalide. !!!!!');
@@ -198,10 +199,10 @@ var replaceChain = (newBlocks, caller) => {
     console.log('Sortie  de',here);
 };
 
-var responseLatestMsg = () => {
+var responseLatestMsg = (caller) => {
     var here = O.functionNameJS (ModuleName);
     console.log('\n');
-    console.log('Entrée dans',here,'avec',A.blockChain.length,'blocs');
+    console.log('Entrée dans',here,'appelé par',caller,'avec',A.blockChain.length,'blocs');
 
     var latestE = getLatestBlock();
     var result = {
