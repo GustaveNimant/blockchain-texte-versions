@@ -1,9 +1,5 @@
 'use strict';
 
-var express = require("express");
-var bodyParser = require('body-parser');
-
-var WebSocket = require("ws");
 var BlocController = require('../controllers/bloc.controller');
 var A = require("./arrays");
 var O = require("./outils");
@@ -49,7 +45,7 @@ var generateNextBlock = (blockData, caller) => {
     console.log('\n');
     console.log('Entrée dans',here,'appelé par',caller,'avec blockData',blockData);
 
-    var previousBlock = B.getLatestBlock();
+    var previousBlock = getLatestBlock();
     var nextIndex = previousBlock.index + 1;
     var nextTimestamp = new Date().getTime() / 1000;
     var nextHash = O.calculateHash(nextIndex, previousBlock.hashCourant, nextTimestamp, blockData);
@@ -227,6 +223,7 @@ var write = (ws, message, caller) => {
 
 module.exports.addBlock = addBlock;
 module.exports.broadcast = broadcast;
+module.exports.generateNextBlock = generateNextBlock;
 module.exports.getGenesisBlock = getGenesisBlock;
 module.exports.getLatestBlock = getLatestBlock;
 module.exports.replaceChain = replaceChain;

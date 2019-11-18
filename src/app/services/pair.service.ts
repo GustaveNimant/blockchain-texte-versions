@@ -38,7 +38,7 @@ export class PairService {
 				resolve(response);
 			    },
 			    (error) => {
-				console.log('Dans createNewPair Erreur', error);
+				console.log('Dans',here,'Erreur', error);
 				reject(error);
 			    },
 			    () => {
@@ -48,7 +48,28 @@ export class PairService {
 	});
     }
     
-    connectPair(pairObjectId: string) { 
+    connectAllPair(caller) { 
+	let here = O.functionName();
+	console.log('%cEntrée dans Promise','color:#0000aa',here,'appelé par',caller);
+	console.log('Dans',here,'uri_all',this.uri_all);
+
+	return new Promise((resolve, reject) => {
+	    this.http.get(this.uri_all + 'connectAllPair')
+		.subscribe(
+		    (response) => {
+			console.log('Dans',here,'response',response);
+			resolve(response);
+			
+		    },
+		    (error) => {
+			console.log('Dans',here,'Erreur', error);
+			reject(error);
+		    }
+		);
+	});
+    }
+    
+    connectOnePair(pairObjectId: string) { 
 	let here = O.functionName();
 	console.log('%cEntrée dans Promise','color:#0000aa',here,'avec pairObjectId',pairObjectId);
 	console.log('Dans',here,'uri_all',this.uri_all);

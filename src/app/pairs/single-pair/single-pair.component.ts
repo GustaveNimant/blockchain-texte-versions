@@ -103,7 +103,7 @@ export class SinglePairComponent implements OnInit, OnDestroy {
     onConnectPair() {
 	this.loading = true;
 
-	this.pairService.connectPair(this.currentPair._id).then(
+	this.pairService.connectOnePair(this.currentPair._id).then(
 	    () => {
 		this.loading = false;
 		this.router.navigate(['/pairs/list-pair']);

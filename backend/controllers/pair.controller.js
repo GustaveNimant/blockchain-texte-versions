@@ -16,11 +16,18 @@ var connectAllPairController = (req, res, next) => {
     pairMongooseModel.find()
 	.then(
 	    (pai_a) => {
-		if (D.debug) {console.log('Dans',here,'pai_a', pai_a)};
-		WS.connectToPeers (pai_a, here)
+		if (D.debug) {console.log('dans',here,'pai_a', pai_a)};
+		var pai_url_a = [];
+		pai_a.forEach (pai => {
+		    if (D.debug) {console.log('dans',here,'pai', pai)};
+		    pai_url_a.push(pai.url);
+		});
+		WS.connectToPeerUrls (pai_url_a, here)
 	    }
 	).catch(
 	    (error) => {
+		if (D.debug) {console.log('dans',here,'Erreur',error)};
+		
 		res.status(400).json({
 		    error: error
 		});
@@ -28,7 +35,7 @@ var connectAllPairController = (req, res, next) => {
 	);
 };
 
-function connectPairController (req, res, next) {
+function connectOnePairController (req, res, next) {
     var here = O.functionNameJS(ModuleName);
     if (D.debug) {console.log('Entrée dans',here,'avec req.params.id', req.params.id)};
     
@@ -176,7 +183,7 @@ exports.savePairController = (req, res, next) => {
 	);
 };
 
-module.exports.connectPairController = connectPairController;
+module.exports.connectAllPairController = connectAllPairController;
+module.exports.connectOnePairController = connectOnePairController;
 module.exports.getAllPairController = getAllPairController;
 module.exports.getOnePairController = getOnePairController;
-module.exports.connectAllPairController = connectAllPairController;

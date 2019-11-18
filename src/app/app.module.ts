@@ -48,6 +48,7 @@ import { ListBlocComponent }             from './blocs/list-bloc/list-bloc.compo
 import { ModifyBlocComponent }           from './blocs/modify-bloc/modify-bloc.component';
 import { NewBlocComponent }              from './blocs/new-bloc/new-bloc.component';
 import { SingleBlocComponent }           from './blocs/single-bloc/single-bloc.component';
+import { ConnectAllPairComponent } from './pairs/connect-all-pair/connect-all-pair.component';
 
 @NgModule({
     declarations: [
@@ -81,6 +82,7 @@ import { SingleBlocComponent }           from './blocs/single-bloc/single-bloc.c
 	SingleTexteComponent,
 	TextesComponent,
 	BlockchainComponent,
+	ConnectAllPairComponent,
     ],
     imports: [
 	BrowserModule,

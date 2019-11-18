@@ -24,13 +24,13 @@ var connectToPeerUrl = (peerUrl, caller) => {
     console.log('Sortie  de ',here);
 };
 
-var connectToPeers = (newPeers, caller) => {
+var connectToPeerUrls = (newPeers, caller) => {
     var here = O.functionNameJS(ModuleName);
     console.log('\n');
     console.log('Entrée dans',here,'appelé par',caller,'avec',newPeers.length,'newPeers');
 
     newPeers.forEach((peerUrl) => {
-	console.log('dans',here,'boucle sur peerUrl',peerUrl);
+	console.log('dans',here,'boucle appel de connectToPeerUrl pour peerUrl',peerUrl);
         connectToPeerUrl(peerUrl, here);
     });
     console.log('Sortie  de ',here);
@@ -169,7 +169,7 @@ var initHttpServer = (http_port, app, caller) => {
     app.post('/addPeer', (req, res) => {
 	console.log('\n');
 	console.log('dans',here,'/addPeer req.body',req.body);
-        connectToPeers([req.body.peer], here);
+        connectToPeerUrls([req.body.peer], here);
         res.send();
     });
     
@@ -282,7 +282,7 @@ var responseChainMsg = (caller) => {
 };
 
 module.exports.connectToPeerUrl = connectToPeerUrl;
-module.exports.connectToPeers = connectToPeers;
+module.exports.connectToPeerUrls = connectToPeerUrls;
 module.exports.initHttpServer = initHttpServer;
 module.exports.initP2PServer = initP2PServer;
 

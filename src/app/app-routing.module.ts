@@ -21,6 +21,7 @@ import { NewTexteVersionComponent }       from './textes/new-texte-version/new-t
 import { SingleTexteComponent }           from './textes/single-texte/single-texte.component';
 
 import { PairsComponent }                  from './pairs/pairs.component';
+import { ConnectAllPairComponent }         from './pairs/connect-all-pair/connect-all-pair.component';
 import { ListPairComponent }               from './pairs/list-pair/list-pair.component';
 import { ModifyPairComponent }             from './pairs/modify-pair/modify-pair.component';
 import { NewPairComponent }                from './pairs/new-pair/new-pair.component';
@@ -55,6 +56,7 @@ const routes: Routes = [
     { path: 'pairs', component: PairsComponent,
       children: [
 	  { path: 'new-pair', component: NewPairComponent},
+	  { path: 'connect-all-pair', component: ConnectAllPairComponent},
 	  { path: 'list-pair', component: ListPairComponent},
 	  { path: 'single-pair/:id', component: SinglePairComponent},
 	  { path: 'modify-pair/:id', component: ModifyPairComponent},

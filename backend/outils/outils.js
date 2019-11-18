@@ -92,11 +92,11 @@ function normalizePort (val) {
 
 module.exports.calculateHash = calculateHash;
 module.exports.calculateHashForBlock = calculateHashForBlock;
-module.exports.isValidEmail = isValidEmail;
-module.exports.functionNameJS = functionNameJS;
-module.exports.normalizePort = normalizePort;
 module.exports.errorHandler = errorHandler;
 module.exports.errorMessage = errorMessage;
+module.exports.functionNameJS = functionNameJS;
 module.exports.getLatestElement = getLatestElement;
+module.exports.isValidEmail = isValidEmail;
+module.exports.normalizePort = normalizePort;
 
 
