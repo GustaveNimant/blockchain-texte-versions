@@ -207,10 +207,12 @@ var initMessageHandler = (ws, caller) => {
 	
         switch (message.type) {
         case B.MessageType.QUERY_LATEST:
+	    console.log('\n');
 	    console.log('dans',here,'write dans',ws.url,'de responseLatestMsg', B.responseLatestMsg(here));
             B.write(ws, B.responseLatestMsg(here), here);
             break;
         case B.MessageType.QUERY_ALL:
+	    console.log('\n');
 	    console.log('dans',here,'write dans',ws.url,'de responseChainMsg', responseChainMsg(here));
             B.write(ws, responseChainMsg(here), here);
             break;
